@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html>
+  	<head>
+    	<title>Ez Shopping Cart Welcome Page</title>
+
+
+	    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" >
+	    <link rel="stylesheet" href="/stylesheets/header.css" type="text/css" >
+	    <link rel="stylesheet" href="/stylesheets/footer.css" type="text/css" >
+	    <link rel="stylesheet" href="/stylesheets/bootstrap.css" type="text/css" >
+	    <link rel="stylesheet" href="/stylesheets/dropdown.css" type="text/css" >
+	    <link rel="stylesheet" href="/stylesheets/error.css" type="text/css" >
+	    
+	    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  
+	    
+	    <script type="text/javascript">
+			jQuery(document).ready(function()
+			{			
+			
+				// ============================ Cart Display ===============================	
+	      		jQuery(".cart_image").click(function()
+	      		{
+	          		var check = jQuery(".cart_content").css("display");
+	          		if(check=="block")
+	            	{
+	              		jQuery(".cart_content").css("display","none");	              		
+	              		$("div.cart_content1").find('span').remove();
+	            	}
+	            	else 
+	            	{
+	            		var ajax_url = "/Ajax_DisplayCart";		
+			          	var data = {};
+						$.ajax({
+			            	type: "POST",
+			            	url:ajax_url,
+			            	
+			            	data: JSON.stringify(data),
+			            	
+			            	contentType: 'application/json',
+			            	
+			            	success: function(output_string) 
+			            	{		
+			            		$("div.cart_content1").append("<span class='product_info'><label class='product_label label_bold'>Name </label><label class='product_label label_bold'>| Count</label><label class='product_label label_bold'>| Prize</label><label class='product_label product_last_row label_bold'>| Amount</label></span>");	           	
+			            		for(var i in output_string) 
+			            		{ 		            			
+			            			$("div.cart_content1").append("<span class='product_info'><label class='product_label'>"+output_string[i].product_name+"</label><label class='product_label'>| "+output_string[i].product_count+"</label><label class='product_label'>| "+output_string[i].product_prize+"</label><label class='product_label'>| "+output_string[i].product_prize*output_string[i].product_count+"</label><a href='/UserHomePage/"+output_string[i].product_name+"/"+output_string[i].product_count+"' class='product_label delete_product' id="+output_string[i].product_name+">Delete "+output_string[i].product_name+"</a></span>");		            			
+			              		} 	
+			            	},
+			            	error: function (error) {
+	                  			alert('Error');
+	              			}
+			          	});
+	              		jQuery(".cart_content").css("display","block");
+	              		
+	            	}	            	
+	            	
+		          	
+	        	});
+	        	
+	        	
+	        	// Insert Products
+	        	 
+		        var temp = 0;        	
+	        	$('input[name="text[]"]').blur(function() 
+	        	{    	        	
+    				temp = $(this).val();
+    				//alert(temp);
+    				//alert('Vishal');
+				});
+	        
+		        $(".add_to_cart").click(function () 
+		        {     			
+		        	$(".message_addToCart").empty();	        
+		        	$('input[name="text[]"]').val('');
+	        		if(temp==0)
+	        		{	        			
+	        			$(".message_addToCart").append("Enter the quantity");
+	        			return false;
+	        		}
+	        		
+		        	var data = {};
+		          	data.insert_product = $(this).attr("id");
+		          	//data.input_no_of_products = $("input[name='text[]']").val();
+		          	
+ 					data.input_no_of_products = temp;
+ 					temp=0;
+		          		          
+		          	var ajax_url = "/Ajax_AddToCart";		
+		          	//alert(data.input_no_of_products);
+				
+		          	$.ajax({
+		            	type: "POST",
+		            	url:ajax_url,
+		            	data: JSON.stringify(data),
+		            	contentType: 'application/json',
+		            	
+		            	success: function(output_string) 
+		            	{			           	
+		              		$(".message_addToCart").append("Successfully Added");	
+		            	},
+		            	error: function (error) {
+                  			alert('Error');
+              			}
+		          	}); 
+		    	});
+	        	
+	      	});
+		</script>
+	</head>
+
+  	<body>
+  	
+		<div class="wrapper">
+    		<header>
+	      		<div class="header-top">
+	        		<div class="container">
+          				<div class="welcome_name pull-left">
+            				<h3>Welcome <%= username %></h3>
+            			</div>
+          				<div class="pull-right">
+            				<nav class="navbar clear-right pull-right">
+              					<ul class="nav nav-pills">                <!-- Header NavBar -->
+					                <li>
+					                  	<a href="/UserHomePage" title="home" class="active">Home</a>
+					                </li>
+                  					<li>
+                  						<a href="/history" title="My History" class="">My History</a>
+                					</li>
+
+				                  	<li>
+				                    	<a href="/" title="logout" class="">Logout</a>
+				                	</li>				                	
+              					</ul>
+            				</nav>
+          				</div>
+        			</div>
+      			</div>
+
+      			<div class="header-bottom">
+        			<div class="container">
+          				<div class="logo">        <!-- Header Logo and Search -->
+            				<a href="/UserHomePage" title="home" class="pull-left"><img src="/images/logo.jpg" alt="Logo" /></a>
+            				<a href="/UserHomePage" title="home" class="pull-left"><h1 class="clear-left">Cart</h1></a>
+          				</div>
+
+          				<div class="search pull-right">
+          				
+          					<div class="shopping-cart pull-right nav nav-pills ">
+	                			<img src="/images/icons/cart_icon.png" class="cart_image">
+	                			<label class="view_cart">View Cart</label>
+                				
+                				<div class="cart_content">  
+                					<div class="cart_content1 pull-left">
+                					</div>                               						
+                   					<form method="post" action="/CheckOut" class="">                     
+                    					<input type="submit" class="btn" name="buy_now_list" value="Check Out"/>                
+                  					</form>   
+                				</div>
+                			</div>  
+                
+			            	<label class="last_login">Last Login: <%= last_login %></label>
+          				</div>
+          					<% if(selectedCategory!="All") 
+			            	{ %>
+			            		<script>			            			
+			            			$("label.last_login").css("display","none");
+			            		</script>
+			            	<% } %>	
+        			</div>
+      			</div>
+     
+    		</header>
+    		
+    		<section class="adjust">
+       			<article class="container ">
+        			<nav class="products-menu">
+        			
+        				
+        				<ul class="nav nav-list generic_category">
+          					<li>          					
+                				<a href='/UserHomePage' class='active all'>
+                  					ALL
+                				</a>
+	                		</li>
+	                		
+							<% for(var i in category_info) 
+          					{ %>
+          					
+	          					<li>
+	                				<a href='/Category/<%= category_info[i].category_name %>' class="<%= category_info[i].category_name %>">
+	                  					<%= category_info[i].category_name %>
+	                				</a>
+	                				<input type="hidden" name="category_name" value="<%= category_info[i].category_name %>"/>
+	                			</li>
+	                			
+	                			<% if(selectedCategory == category_info[i].category_name) 
+	                			{%>
+	                				<script>
+	                					$(".<%= selectedCategory %>").addClass('active');
+    									$(".all").removeClass('active');
+    								</script>
+	                			<% } %>
+	                		<% } %>
+          				</ul>
+          			</nav>
+          			
+    				<div class="product_content pull-right">
+        				<h3>Products
+        					<span class="message_addToCart"></span>
+        				</h3>
+        				<div class="rows-container">        				
+        					<% if(products_info=='')
+        					{ %>
+        						<p>No Record Found</p>
+        					<% } %>
+     						<% for(var i in products_info) 
+     						{     								
+								%>
+
+  									<div class="span3 pull-left">
+    									<p><strong>Name: </strong><%= products_info[i].product_name %></p>
+    									<p><strong>Price: </strong><%= products_info[i].product_prize %></p>
+    									<p><strong>Details: </strong><%= products_info[i].product_desc %></p>
+    									<% if(products_info[i].no_of_product < 5) 
+										{     								
+											%>
+											<p><strong>Out of Stock </strong></p>
+    									<% } 
+    									else
+    									{ 
+    										%>
+    										<p><strong>Available </strong></p>                                   
+      										<form method="post" action="">	
+        										<input type="hidden" name="product_name" value="<%= products_info[i].product_name %>" class="product_name <%= products_info[i].product_name %>" id="<%= products_info[i].product_name %>"/>
+        										
+						                    	<input type="text" class="input_no_of_products" name="text[]" value=""/>
+						                    	<input type="button" class="btn add_to_cart" id="<%= products_info[i].product_name %>" name="add_to_cart" value="Add To Cart"/>
+						                    							                    
+      										</form>
+                        
+      										
+    									<% } %>
+  									</div>
+
+								<% 
+        					}  %>
+      					</div>
+      				</div>
+          		</article>
+          	</section> 
+          	  		
+    	
+		<div class="push"></div>
+		</div>
+
+    	<div class="footer">
+    		<footer>
+      			<div class="container">
+        			<p class="copyright">
+          				Copyright 2012 for
+          				<strong><a href="/UserHomePage" title="home" >EZCart.com</a></strong>
+        			</p>
+
+      			</div>
+    		</footer>
+		</div>
+  	</body>
+</html>

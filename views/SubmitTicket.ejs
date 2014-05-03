@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>Submit Ticket</title>	
+		<link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />	
+		<link rel="stylesheet" href="/stylesheets/common_style.css">	
+		<link rel="stylesheet" href="/stylesheets/admin.css">
+		
+		<link href="/stylesheets/jquery.akordeon.css" rel="stylesheet" type="text/css" />
+	    <link href="/stylesheets/demo.css" rel="stylesheet" type="text/css" />
+	    
+	    
+	    <script src="/js/jquery.min.js" type="text/javascript"></script>
+		<script src="/js/bootstrap.js" type="text/javascript"></script>
+	    <script src="/js/jquery.akordeon.js" type="text/javascript"></script>
+	    
+	    <script type="text/javascript">
+	        $(document).ready(function () {
+	            $('#buttons').akordeon();
+	            $('#button-less').akordeon({ buttons: false, toggle: true, itemsOrder: [2, 0, 1] });
+	        });
+	    </script>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<div class="header float_left">		
+				<div class="top_header">			
+					<div class="logo float_left">					
+						<a href="/" class="float_left">
+							<img src="/images/logovishal.png">
+						</a>
+					</div>			
+				</div>
+				<div class="bottom_header float_left">
+					<div class="menu-bar float_left">
+						<ul class="float_left">					
+							<li class="float_left li_home">
+								<a href="/" class="">Home</a>
+							</li>
+
+							<li class="float_left li_answers li_active">
+								<a href="/Answers">Answers</a>
+							</li>
+
+							<li class="float_left li_request">
+								<a href="/ReqSupport">Request Support</a>
+							</li>
+							
+							<li class="float_left li_request">
+								<label class="admin" data-toggle="modal" data-target="#myModal">Admin</label>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+			</div> <!-- End of header div -->	
+
+
+			<div class="body float_left">
+				<div class="body_wrapper float_left">
+					<div class="left_body float_left">
+						<div class="banner float_left">
+							<p class="float_left banner_info">
+								<span class="welcome float_left">Submit a Ticket</span>
+								<span class="info1 float_left clear_left">Support Ticket System enables you to directly submit a support ticket to a technical specialist whose expertise matches your inquiry.</span>
+							</p>
+						</div>
+						<div class="content float_left clear_left">
+							<form class="forms" action="/Successful" method="post">
+								<fieldset class="all_form contact_form">
+									<legend> Contact Info </legend>
+									<p>
+										<label>*Name:</label>
+										<input type="text" name="username" class="username" />
+									</p>
+			
+									<p>
+										<label>* Email:</label>
+										<input type="email" name="email" class="email" />
+									</p>
+								</fieldset>
+			
+								<fieldset class="all_form description_form">
+									<legend> Ticket Description </legend>
+									<p>
+										<label>Urgency:</label>
+										<select name="urgency">
+											<option value>-- Select One --</option>
+											<option>Urgent</option>
+											<option>High</option>
+											<option>Medium</option>
+											<option>Low</option>
+										</select>
+									</p>
+												
+									<p>
+										<label>Doubt about:</label>
+										<input type="text" name="topic_name" class="topic_name" />
+									</p>
+						
+									<p>
+										<label>Details (Please be as specific as possible):</label>
+										<textarea type="text" name="topic_details" class="topic_details"></textarea>
+									</p>
+																		
+								</fieldset>
+									
+								<div class="buttons">														
+									<input  class="button" type="submit" value="Finish >>">
+								</div>
+			
+							</form>
+						</div>
+					</div>								
+				</div>		
+			</div>  <!-- End of body div -->
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  	<div class="modal-dialog">
+			    	<div class="modal-content">
+			      		<div class="modal-header">
+			        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        		<h4 class="modal-title" id="myModalLabel">Admin Login</h4>
+			      		</div>
+				      	<div class="modal-body float_left">
+				      		<form class="container login_container form-horizontal float_left" action="/Admin" method="post">
+		      		                
+				      			<div class="control-group control_login float_left clear_left">
+				          			<div class="controls">
+				            			<input type="text" id="login_email" name="login_email" placeholder="Email"  value="" >
+				          			</div>
+				          			<label id="login_email_error"></label>
+				        		</div>
+				                
+				        		<div class="control-group control_login float_left clear_left">
+				          			<div class="controls">
+				            			<input type="password" id="login_password" name="login_password" placeholder="Password" >
+				          			</div>
+				          			<label id="login_password_error"></label>
+				        		</div>			        			        			
+				
+				        		<div class="control-group login_div control_login float_left clear_left login_divButtonDiv">
+				          			<div class="controls">
+				            		<button type="submit" class="btn" name="login" id="login_button">Log In</button>
+				            		<label id="login_error"></label>
+				          			</div>
+				          		</div>    		          				          	
+				          		    	              
+				      		</form>		      	
+				      	</div>
+				      	<div class="modal-footer clear_left">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>					        
+				      	</div>
+			    	</div>
+			  	</div>
+			</div>
+			
+			<div class="footer clear_left float_left">
+				<p>Copyright © 2014 by Team #4 </p>
+			</div>		
+		</div>
+	</body>
+
+</html>

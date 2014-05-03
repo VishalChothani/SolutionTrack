@@ -1,0 +1,371 @@
+.float_left
+{
+	float:left;
+}
+
+.float_right
+{
+	float:right;
+}
+
+.clear_left
+{
+	clear:left;
+}
+
+.clear_right
+{
+	clear:right;
+}
+
+body
+{
+	margin:0px;
+	font:normal normal normal 14px/1.2em caudex, serif;
+	font-size: 12px;
+	background-color: black;
+	height: 100%;
+}
+
+div.left_body
+{
+	margin-top: 25px; 
+}
+
+.wrapper 
+{
+	width:960px;
+	margin: 0px auto;
+	overflow: hidden;
+}
+
+.wrapper .header 
+{
+	width:100%;	
+}
+.wrapper .header .top_header 
+{		
+	width: 23%;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-top: 4%;
+}
+
+.wrapper .header .bottom_header 
+{		
+	width: 100%;
+	margin-bottom: 10px;	
+}
+
+
+.wrapper .menu-bar {
+	background-color:black;
+	width: 100%;
+}
+
+.wrapper .menu-bar ul 
+{
+ 	list-style: none;
+ 	margin-left:0%;
+ 	padding-left:28%;
+ 	width:72%;
+}
+
+.wrapper .menu-bar ul li 
+{
+	display: list-item;
+	padding-right:2%;
+	padding-left:2%;
+	margin-left:2%;
+	text-align:center;		
+}
+
+.wrapper .menu-bar ul li:hover 
+{
+	background-color: #83a626;
+}
+
+.wrapper .menu-bar ul li a {
+	width:100%;
+	color: #c9f055;
+	font-weight: bold;
+	font-size: 19px;
+	text-decoration: none;
+	line-height: 40px;
+}
+
+.wrapper .menu-bar ul li label {
+	width:100%;
+	color: #c9f055;
+	font-weight: bold;
+	font-size: 19px;
+	text-decoration: none;
+	line-height: 40px;
+}
+
+.wrapper .menu-bar ul li a.active{
+	color: #c9f055;
+}
+
+.wrapper .menu-bar ul li.li_active
+{
+	background-color: #83a626;
+}
+
+/* body */
+
+.wrapper .body 
+{	
+	width:95%;
+	border: 2px solid #c9f055;
+	padding: 12px;
+	background-color: #83a626;
+} 
+
+.wrapper .body .body_wrapper 
+{
+	width:100%;	
+	border: 2px solid black;
+	min-height: 500px;
+	/* background-image: url("../images/solutions.jpg"); */
+	background: black;
+}
+
+.wrapper .body .body_wrapper .left_body .banner 
+{	
+	width:100%
+}
+
+.wrapper .body .body_wrapper .left_body .banner p.banner_info 
+{	
+	font-size: 18px;
+	margin-left: 26px;
+	line-height: 25px;
+	font-weight: bold;
+	color: white;
+}
+
+span.welcome
+{
+	font-size:20px;
+	color: #c9f055;	
+}
+
+span.info1, span.info2
+{
+	margin-left: 40px;
+	font-weight: normal;
+}
+
+.wrapper .body .body_wrapper .left_body .content 
+{
+	width:100%;
+}
+
+.wrapper .body .body_wrapper .left_body .content ul 
+{
+	margin-top:30px;
+	list-style: none;
+	width:90%;
+}
+
+.wrapper .body .body_wrapper .left_body .content ul li 
+{
+	float:left;
+	display: list-item;
+	width:45%;
+	margin-bottom:25px;
+	padding-bottom:25px;	
+	margin-left:5%;
+}
+
+.wrapper .body .body_wrapper .left_body .content ul li img 
+{
+	float:left;
+	width : 24%;
+}
+
+.wrapper .body .body_wrapper .left_body .content ul li .details 
+{
+	float:left;
+	width:74%;
+	margin-left: 2%;
+	font-size: 19px;
+	line-height: 16px;
+	color: white;
+}
+
+.wrapper .body .body_wrapper .left_body .content ul li .details a 
+{
+	color : #c9f055;
+}
+
+.wrapper .body .body_wrapper .left_body .content ul li .details a:hover
+{
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 18px;	
+}
+
+.wrapper .body .body_wrapper .left_body .content ul li .details p 
+{
+	float:left;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-size:16px;
+}
+
+.wrapper .body .body_wrapper .left_body .content ul li .details p a
+{
+	font-size:18px;
+	font-weight: bold;
+}
+
+.wrapper .footer 
+{
+	width:100%;
+	padding-bottom:10px;
+	padding-top:10px;
+}
+
+.wrapper .footer p 
+{
+	width: 100%;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	text-decoration: none;
+}
+
+/* Request Support page css */
+
+.wrapper .body .body_wrapper .req_support
+{
+	float:left;
+	width:90%;
+	margin-left:7%;
+}
+
+.wrapper .body .body_wrapper .req_support p 
+{
+	background-color: #EBE7CE;
+	display: block;
+	padding: 20px;
+	font-size: 14px;
+	line-height: 18px;
+	border: 1px solid #D5CFAB;
+}
+
+/* Ticket Submission */
+
+.wrapper .body .body_wrapper .forms 
+{
+
+	clear:left;
+	float:left;
+	width:90%;
+	margin-left:7%;
+
+}
+
+.wrapper .body .body_wrapper .forms input
+{
+	width:150px;
+}
+
+.wrapper .body .body_wrapper .forms .all_form 
+{
+	float:left;
+	width: 97.6%;
+	border: 1px solid #CCC;
+	margin-bottom:15px;
+
+}
+
+.wrapper .body .body_wrapper .forms .all_form p 
+{
+	float:left;
+	width:100%;
+}
+
+.wrapper .body .body_wrapper .forms .all_form label 
+{
+	float:left;
+	text-align:right;
+	width:15%;
+	font-weight: bold;
+	float: left;
+	font-size: 14px;
+	margin-right:0.3%;
+	color: gray;
+	margin-right:15px;
+}
+
+.wrapper .body .body_wrapper .forms .all_form  select 
+{
+	width: 18.7%;
+}
+
+.wrapper .body .body_wrapper .forms .all_form  textarea 
+{
+	width: 408px; 
+	height: 150px; 
+	float:left;
+}
+
+.wrapper .body .body_wrapper .forms .button, section.section_container div.content div.buttons input
+{
+	background-color: #CCC;
+	float:left;
+	border-radius: 4px 4px 4px 4px;
+	border-color: #CCC #AAA #AAA #CCC !important;
+	border-right: 1px solid #AAA !important;
+	border-style: solid !important;
+	border-width: 1px !important;
+	color: #333 !important;
+	cursor: pointer;
+	font-family: arial !important;
+	font-size: 110% !important;
+	font-weight: bold !important;
+	padding: 5px 8px !important;
+	text-align: center !important;
+	text-decoration: none;
+	vertical-align: baseline !important;
+	margin-left:1%;
+	margin-right:1%;
+}
+
+.wrapper .body .body_wrapper .forms .button:hover 
+{
+	background-color: #AAA;
+}
+
+.wrapper .body .body_wrapper .forms .all_form  .customerlist 
+{
+	height :150px;
+}
+
+.wrapper .body .body_wrapper .forms .buttons 
+{
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+}
+
+legend 
+{
+	font-size: 1.3em;
+	font-weight: bold;
+	color:white;
+}
+
+.wrapper .body .body_wrapper .left_body .thanx_msg
+{
+	margin-left: 140px;
+    margin-top: 100px;
+}
+
+span.no_record
+{
+	font-size: 20px;
+}

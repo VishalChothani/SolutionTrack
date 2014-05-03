@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= searchResult %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% for(i in searchResult)
+    { %>
+    	<span> <%= searchResult[i].question %>
+    <% } %>
+  </body>
+</html>

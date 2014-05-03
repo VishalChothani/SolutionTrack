@@ -1,0 +1,112 @@
+/* Accordian  */
+
+.demobar
+{
+    height: 90px;
+    line-height: 90px;
+}
+.demobar .fleft
+{
+    float: left;
+    margin-left: 10px;
+}
+.demobar .fright
+{
+    float: right;
+    margin-top: 14px;
+    margin-right: 10px;
+}
+	       
+/* admin */
+
+.body_wrapper .content
+{
+	width: 100%;
+	margin-top: 25px;
+}
+
+.body_wrapper .content #options
+{
+	width: 20%;
+	margin-left:25px;
+}
+
+#options ul li label
+{
+	color:white;
+	font-size:16px;	
+}
+
+#options ul
+{
+	display: block;
+	width:75%;
+}
+
+#options ul li
+{
+	float:none;
+	padding:10px;
+	border-bottom:1px solid white;
+	list-style: none;
+}
+
+
+#options ul li.active
+{	
+	list-style: none;
+}
+
+#options ul li.active label
+{
+	color: #c9f055;
+}
+
+li.list_options label a
+{
+	color: white;
+	text-decoration: none;
+}
+
+div.control_login input
+{
+	font-size : 16px;
+}
+
+section.section_send_reply
+{
+	width:100%;
+	display:none;
+	float:left;
+}
+
+section.section_container, section.section_container div.content 
+{
+	width: 100%;
+}
+
+section.section_container div.content label
+{
+	font-size: 17px;
+	color: #83a626;
+}
+
+section.section_container div.content textarea
+{
+	width: 30%;
+	height: 50px;
+}
+
+section.section_container div.content input
+{
+	width: 20%;
+	margin-left: 6px;
+}
+
+p.msg_send_ack
+{
+	color: red;
+	font-size: 23px;
+	margin: 0px;
+	margin-bottom: 6px;
+}
