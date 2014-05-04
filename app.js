@@ -90,6 +90,16 @@ app.get('/SubmitTicket', function(req, res)
 	res.render('SubmitTicket.ejs');
 });
 
+app.get('/Downloads', function(req, res)
+{
+	res.render('Downloads.ejs');
+});
+
+app.post('/Downloads', function(req, res)
+{
+	res.render('Downloads.ejs');
+});
+
 
 app.post('/Successful', function(req, res)
 {

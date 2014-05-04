@@ -13,6 +13,7 @@
 	    <script src="/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/js/bootstrap.js" type="text/javascript"></script>
 	    <script src="/js/jquery.akordeon.js" type="text/javascript"></script>
+	    <script src="/validator.js" type="text/javascript"></script>
 	    
 	    <script type="text/javascript">
 	        $(document).ready(function () {
@@ -67,7 +68,12 @@
 							</p>
 						</div>
 						<div class="content float_left clear_left">
-							<form class="forms" action="/Successful" method="post">
+							<form class="forms" action="/Successful" method="post" onsubmit="return (
+								validateText(username,'User name') &&
+								validateEmail(email,'Email') &&
+								validateText(topic_name,'Topic name') &&
+								validateText(topic_details,'Topic name')
+							);" >
 								<fieldset class="all_form contact_form">
 									<legend> Contact Info </legend>
 									<p>
@@ -77,7 +83,7 @@
 			
 									<p>
 										<label>* Email:</label>
-										<input type="email" name="email" class="email" />
+										<input name="email" class="email" />
 									</p>
 								</fieldset>
 			
@@ -85,9 +91,8 @@
 									<legend> Ticket Description </legend>
 									<p>
 										<label>Urgency:</label>
-										<select name="urgency">
-											<option value>-- Select One --</option>
-											<option>Urgent</option>
+										<select name="urgency">											
+											<option value>Urgent</option>
 											<option>High</option>
 											<option>Medium</option>
 											<option>Low</option>

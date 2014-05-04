@@ -369,3 +369,19 @@ span.no_record
 {
 	font-size: 20px;
 }
+
+.download_div
+{
+	margin-left:20px;
+}
+
+.download_div a
+{
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+.download_div img
+{
+	border-radius: 25px;
+}
