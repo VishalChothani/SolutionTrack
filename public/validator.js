@@ -1,5 +1,5 @@
 function validateText(field, fieldName, requiredLength) {
-	var value = field.value;
+	var value = field.value;	
 	if(!validateBlank(value, fieldName)) {
 		field.focus();
 		return false;
@@ -48,9 +48,8 @@ function validateNum(value, fieldName) {
 	return isOnlyNumbers;
 }
 
-function validateBlank(field, fieldName) {
+function validateBlank(value, fieldName) {
 	
-	var value = field.value;
 	if (value == null || value.trim() == "") {
 		alert("Please enter " + fieldName);
 		return false;
@@ -58,8 +57,7 @@ function validateBlank(field, fieldName) {
 	return true;
 }
 
-function validateEmail(field, fieldName, requiredLength) {
-	alert('Inside blank for '+field);
+function validateEmail(field, fieldName, requiredLength) {	
 	var value = field.value;
 	if(!validateBlank(value, fieldName)) {
 		field.focus();

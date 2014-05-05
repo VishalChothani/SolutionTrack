@@ -117,7 +117,7 @@ app.post('/Successful', function(req, res)
 			    to: req.param('email'), 
 			    subject: "Automatic reply", 
 			    text: "We have recieved your question and we will reply you as soon as possible, Thank you for using Solution Track", 
-			    html: "<b>Automatic reply</b>" 
+			    html: "<b>We have recieved your request. One of our Admins will reply you shortly. \n Thank you for using Solution Track</b>" 
 			}
 			
 			// send mail with defined transport object
@@ -180,8 +180,8 @@ app.post('/Admin', function(req, res)
 				    from: "<team4.272.2014@gmail.com>", 
 				    to: req.param('login_email'), 
 				    subject: "Logged in with Solution Track ", 
-				    text: "Hello world ", 
-				    html: "<b>Hello world </b>" 
+				    text: "Logged in with Solution Track", 
+				    html: "Logged in with Solution Track" 
 				}
 			
 			smtpTransportAuth.sendMail(mailOptions, function(error, response)
@@ -314,9 +314,9 @@ app.post('/SendMail', function(req, res)
 	var mailOptions = {
 		    from: "<team4.272.2014@gmail.com>", 
 		    to: req.session.email, // list of receivers
-		    subject: "Hello", // Subject line
+		    subject: "Solution Track", // Subject line
 		    text: req.param('reply_to_prob'), // plaintext body
-		    html: "<b>Hello world </b>" // html body
+		    html: req.param('reply_to_prob'), // plaintext body
 		}
 		
 		// send mail with defined transport object

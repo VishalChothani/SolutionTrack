@@ -68,12 +68,12 @@
 							</p>
 						</div>
 						<div class="content float_left clear_left">
-							<form class="forms" action="/Successful" method="post" onsubmit="return (
-								validateText(username,'User name') &&
-								validateEmail(email,'Email') &&
-								validateText(topic_name,'Topic name') &&
-								validateText(topic_details,'Topic name')
-							);" >
+							<form class="forms" action="/Successful" method="post" onsubmit="
+							return validateText(username,'Username')
+								&& validateEmail(email,'E-mail')
+								&& validateText(topic_name,'Topic Name')
+								&& validateText(topic_details,'Topic Details')
+							">
 								<fieldset class="all_form contact_form">
 									<legend> Contact Info </legend>
 									<p>
@@ -100,13 +100,13 @@
 									</p>
 												
 									<p>
-										<label>Doubt about:</label>
+										<label>*Doubt about:</label>
 										<input type="text" name="topic_name" class="topic_name" />
 									</p>
 						
 									<p>
-										<label>Details (Please be as specific as possible):</label>
-										<textarea type="text" name="topic_details" class="topic_details"></textarea>
+										<label>*Details (Please be as specific as possible):</label>
+										<textarea type="text" name="topic_details" id="topic_details" class="topic_details"></textarea>
 									</p>
 																		
 								</fieldset>
