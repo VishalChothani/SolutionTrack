@@ -23,7 +23,7 @@ body
 	margin:0px;
 	font:normal normal normal 14px/1.2em caudex, serif;
 	font-size: 12px;
-	background-color: #074e68;
+	background-color: black;
 	height: 100%;
 }
 
@@ -34,7 +34,7 @@ div.left_body
 
 .wrapper 
 {
-	width: 750px;
+	width:960px;
 	margin: 0px auto;
 	overflow: hidden;
 }
@@ -45,6 +45,7 @@ div.left_body
 }
 .wrapper .header .top_header 
 {		
+	width: 23%;
 	overflow: hidden;
 	margin: 0 auto;
 	margin-top: 4%;
@@ -58,20 +59,16 @@ div.left_body
 
 
 .wrapper .menu-bar {
-	
+	background-color:black;
 	width: 100%;
-	background: #fff;
-	border: 1px solid;
-	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
-	border-radius: 3px;
 }
 
 .wrapper .menu-bar ul 
 {
  	list-style: none;
- 	margin:0%;
- 	padding-left:22%;
- 	width:100%;
+ 	margin-left:0%;
+ 	padding-left:28%;
+ 	width:72%;
 }
 
 .wrapper .menu-bar ul li 
@@ -85,22 +82,12 @@ div.left_body
 
 .wrapper .menu-bar ul li:hover 
 {
-	background-color: #074e68;	
-}
-
-.wrapper .menu-bar ul li label:hover 
-{
-	color: white;	
-}
-
-.wrapper .menu-bar ul li:hover  a
-{
-	color: white;
+	background-color: #83a626;
 }
 
 .wrapper .menu-bar ul li a {
 	width:100%;
-	color: #074e68;
+	color: #c9f055;
 	font-weight: bold;
 	font-size: 19px;
 	text-decoration: none;
@@ -109,7 +96,7 @@ div.left_body
 
 .wrapper .menu-bar ul li label {
 	width:100%;
-	color: #074e68;
+	color: #c9f055;
 	font-weight: bold;
 	font-size: 19px;
 	text-decoration: none;
@@ -122,29 +109,26 @@ div.left_body
 
 .wrapper .menu-bar ul li.li_active
 {
-	background-color: #074e68;
-}
-
-.wrapper .menu-bar ul li.li_active a
-{
-	color : white;
+	background-color: #83a626;
 }
 
 /* body */
 
 .wrapper .body 
 {	
-	width:100%;	
+	width:95%;
+	border: 2px solid #c9f055;
+	padding: 12px;
+	background-color: #83a626;
 } 
 
 .wrapper .body .body_wrapper 
 {
-	width:100%;		
+	width:100%;	
+	border: 2px solid black;
 	min-height: 500px;
-	background: #fff;
-	border: 1px solid;
-	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
-	-webkit-border-radius: 3px;
+	/* background-image: url("../images/solutions.jpg"); */
+	background: black;
 }
 
 .wrapper .body .body_wrapper .left_body .banner 
@@ -158,13 +142,13 @@ div.left_body
 	margin-left: 26px;
 	line-height: 25px;
 	font-weight: bold;
-	color: cornflowerblue;
+	color: white;
 }
 
 span.welcome
 {
 	font-size:20px;
-	color: #074e68;	
+	color: #c9f055;	
 }
 
 span.info1, span.info2
@@ -208,12 +192,12 @@ span.info1, span.info2
 	margin-left: 2%;
 	font-size: 19px;
 	line-height: 16px;
-	color: cornflowerblue;
+	color: white;
 }
 
 .wrapper .body .body_wrapper .left_body .content ul li .details a 
 {
-	color : #074e68;
+	color : #c9f055;
 }
 
 .wrapper .body .body_wrapper .left_body .content ul li .details a:hover
@@ -400,25 +384,4 @@ span.no_record
 .download_div img
 {
 	border-radius: 25px;
-}
-
-li.li_admin
-{
-	height: 40px;
-}
-
-div.top_header div.logo
-{
-	width: 100%;
-}
-
-div.top_header div.logo a
-{
-	width: 100%;
-}
-
-div.top_header div.logo a img
-{
-	width: 32%;
-	margin-left: 36%;
 }

@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <title>Answer Page</title>
-	    <link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />	
+	    <title>Submit Ticket</title>	
+		<link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />	
 		<link rel="stylesheet" href="/stylesheets/common_style.css">	
 		<link rel="stylesheet" href="/stylesheets/admin.css">
 		
 		<link href="/stylesheets/jquery.akordeon.css" rel="stylesheet" type="text/css" />
 	    <link href="/stylesheets/demo.css" rel="stylesheet" type="text/css" />
-	    <link href="/stylesheets/search.css" rel="stylesheet" type="text/css" />
-	    <link href="/stylesheets/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 	    
 	    
 	    <script src="/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/js/bootstrap.js" type="text/javascript"></script>
 	    <script src="/js/jquery.akordeon.js" type="text/javascript"></script>
-	    <script src="/js/jquery-ui-1.10.4.custom.js"></script>
+	    <script src="/validator.js" type="text/javascript"></script>
 	    
 	    <script type="text/javascript">
 	        $(document).ready(function () {
@@ -23,42 +21,6 @@
 	            $('#button-less').akordeon({ buttons: false, toggle: true, itemsOrder: [2, 0, 1] });
 	        });
 	    </script>
-	    
-	    <script>
-			$(function() 
-			{				
-				var availableTags = [
-				"Account",
-				"Password Strength",
-				"Email notification",
-				"Language setting",
-				"Security question",
-				"Change name",
-				"Fraudulent",
-				"Hack",
-				"Stolen",
-				"Block",
-				"privacy",
-				"Change picture",
-				"Cover Page",
-				"Post",
-				"Who can see",
-				"Relationship",
-				"Latest Version",
-				"Uninstall",
-				"Upload photo",
-				"Profile Picture",
-				"Log In",
-				"Log Out",
-				"Password",
-				"Password Strength",
-			];
-			$("#autocomplete").autocomplete({				
-				source: availableTags
-			});
-			});
-		</script>
-	    	    	
 	</head>
 
 	<body>
@@ -66,15 +28,14 @@
 			<div class="header float_left">		
 				<div class="top_header">			
 					<div class="logo float_left">					
-						<a href="#" class="float_left">
+						<a href="/" class="float_left">
 							<img src="/images/logovishal.png">
 						</a>
 					</div>			
 				</div>
 				<div class="bottom_header float_left">
 					<div class="menu-bar float_left">
-						
-						<ul class="float_left ul_adjust">					
+						<ul class="float_left">					
 							<li class="float_left li_home">
 								<a href="/" class="">Home</a>
 							</li>
@@ -87,7 +48,7 @@
 								<a href="/ReqSupport">Request Support</a>
 							</li>
 							
-							<li class="float_left li_admin">
+							<li class="float_left li_request">
 								<label class="admin" data-toggle="modal" data-target="#myModal">Admin</label>
 							</li>
 							
@@ -102,57 +63,64 @@
 					<div class="left_body float_left">
 						<div class="banner float_left">
 							<p class="float_left banner_info">
-								<span class="welcome float_left">Welcome to the Support Center</span>
-								<span class="info1 float_left clear_left">Please search for information or Submit a Ticket in order</span>
-								<span class="info2 float_left clear_left">for personalized assistance.</span>
+								<span class="welcome float_left">Submit a Ticket</span>
+								<span class="info1 float_left clear_left">Support Ticket System enables you to directly submit a support ticket to a technical specialist whose expertise matches your inquiry.</span>
 							</p>
 						</div>
-					</div>	
-					
-					<form action="/search" class="search-form frame inbtn rlarge  clear_left float_right" method="post">
-					    <input type="text" id="autocomplete" name="search_value" class="search-input search_value" placeholder="Search..." />
-					    <input class="search-btn" type="submit" value="Go" />        
-					</form>
-					
-					<div class="content float_left clear_left">
-						<div id='options' class="float_left">
-							<ul class="float_left">	
-								<% for(var i in options)
-								{ %> 
-									<li class="list_options" id="<%= options[i].option_id %>"><label><a href="/Answers/<%= options[i].option_id %>"><%= options[i].option %></a></label></li>
-	          					<% } %>
-	          				</ul>	          										
-						</div>																			
-					
-						<!-- ********************************** -->
+						<div class="content float_left clear_left">
+							<form class="forms" action="/Successful" method="post" onsubmit="
+							return validateText(username,'Username')
+								&& validateEmail(email,'E-mail')
+								&& validateText(topic_name,'Topic Name')
+								&& validateText(topic_details,'Topic Details')
+							">
+								<fieldset class="all_form contact_form">
+									<legend> Contact Info </legend>
+									<p>
+										<label>*Name:</label>
+										<input type="text" name="username" class="username" />
+									</p>
+			
+									<p>
+										<label>* Email:</label>
+										<input name="email" class="email" />
+									</p>
+								</fieldset>
+			
+								<fieldset class="all_form description_form">
+									<legend> Ticket Description </legend>
+									<p>
+										<label>Urgency:</label>
+										<select name="urgency">											
+											<option value>Urgent</option>
+											<option>High</option>
+											<option>Medium</option>
+											<option>Low</option>
+										</select>
+									</p>
+												
+									<p>
+										<label>*Doubt about:</label>
+										<input type="text" name="topic_name" class="topic_name" />
+									</p>
 						
-						<div id="demo-wrapper" class="float_left">
-					        <div class="akordeon" id="buttons">					            
-				            	<% for(var i in questionsAnswers)
-								{ %> 
-									<div class="akordeon-item expanded">
-										<div class="akordeon-item-head">
-						                    <div class="akordeon-item-head-container">
-						                        <div class="akordeon-heading">
-						                            <%= questionsAnswers[i].question %>
-						                        </div>
-						                    </div>
-						                </div>
-					                
-						                <div class="akordeon-item-body">
-					                    	<div class="akordeon-item-content">
-					                    		<%= questionsAnswers[i].answer %>
-					                    	</div>
-					                    </div>
-				                    </div>
-          						<% } %>
-					        </div>	
+									<p>
+										<label>*Details (Please be as specific as possible):</label>
+										<textarea type="text" name="topic_details" id="topic_details" class="topic_details"></textarea>
+									</p>
+																		
+								</fieldset>
+									
+								<div class="buttons">														
+									<input  class="button" type="submit" value="Finish >>">
+								</div>
+			
+							</form>
 						</div>
-					</div>						
+					</div>								
 				</div>		
 			</div>  <!-- End of body div -->
-			
-			
+
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  	<div class="modal-dialog">
@@ -180,7 +148,8 @@
 				
 				        		<div class="control-group login_div control_login float_left clear_left login_divButtonDiv">
 				          			<div class="controls">
-				            		<button type="submit" class="btn" name="login" id="login_button">Log In</button>				            		
+				            		<button type="submit" class="btn" name="login" id="login_button">Log In</button>
+				            		<label id="login_error"></label>
 				          			</div>
 				          		</div>    		          				          	
 				          		    	              
@@ -193,11 +162,6 @@
 			  	</div>
 			</div>
 			
-			<script>
-				$(document).ready(function(){
-					$("li#<%= currently_active %> label a").css("color","cornflowerblue");
-				});
-			</script>
 			<div class="footer clear_left float_left">
 				<p>Copyright © 2014 by Team #4 </p>
 			</div>		

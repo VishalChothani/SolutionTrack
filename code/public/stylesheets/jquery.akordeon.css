@@ -1,6 +1,6 @@
 .akordeon
 {
-    width: 603px;
+    width: 616px;
     border: solid 1px black;
     color: White;
     font-family: Arial;
@@ -17,7 +17,14 @@
 .akordeon-item .akordeon-item-head
 {
     height: 44px;
-    background-color: lightgray; 
+    background: #4B4B4B; /* Old browsers */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4b4b4b), to(#303030));
+    background-image: -moz-linear-gradient(#4b4b4b, #303030);
+    background-image: -webkit-linear-gradient(#4b4b4b, #303030);
+    background-image: -o-linear-gradient(#4b4b4b, #303030);
+    background: -ms-linear-gradient(#4b4b4b, #303030);
+    background: linear-gradient(#4b4b4b, #303030);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b4b4b', endColorstr='#303030',GradientType=0 ); /* IE6-9 */ /*position:relative;*/
     padding-top: 14px;
 }
 .akordeon-item .akordeon-item-body
@@ -37,7 +44,14 @@
 {
     width: 34px;
     height: 30px;
-    background: #074e68; /* Old browsers */
+    background: #c9f055; /* Old browsers */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c9f055), to(#95e21a));
+    background-image: -moz-linear-gradient(#c9f055, #95e21a);
+    background-image: -webkit-linear-gradient(#c9f055, #95e21a);
+    background-image: -o-linear-gradient(#c9f055, #95e21a);
+    background: -ms-linear-gradient(#c9f055, #95e21a);
+    background: linear-gradient(#c9f055, #95e21a);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9f055', endColorstr='#95e21a',GradientType=0 ); /* IE6-9 */
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px; /* position: absolute;     left: -8px;       top:14px;*/
@@ -53,11 +67,10 @@
     padding-left: 10px;
     padding-top: 8px;
     font-weight: bold;
-    color: #074e68;
 }
 .akordeon-icon span
 {
-    color: goldenrod;
+    color: #83a626;
     font-size: 36px;
     position: absolute;
     left: 6px;
@@ -87,7 +100,7 @@
 
 .akordeon-item.expanded .akordeon-heading
 {
-    color: #83a626;
+    color: #c9f055;
 }
 
 .akordeon-item.expanded .akordeon-item-head

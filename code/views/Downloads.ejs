@@ -1,64 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <title>Answer Page</title>
-	    <link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />	
+	    <title>Welcome Page</title>	
+		<link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />	
 		<link rel="stylesheet" href="/stylesheets/common_style.css">	
 		<link rel="stylesheet" href="/stylesheets/admin.css">
 		
 		<link href="/stylesheets/jquery.akordeon.css" rel="stylesheet" type="text/css" />
 	    <link href="/stylesheets/demo.css" rel="stylesheet" type="text/css" />
-	    <link href="/stylesheets/search.css" rel="stylesheet" type="text/css" />
-	    <link href="/stylesheets/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 	    
 	    
 	    <script src="/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/js/bootstrap.js" type="text/javascript"></script>
 	    <script src="/js/jquery.akordeon.js" type="text/javascript"></script>
-	    <script src="/js/jquery-ui-1.10.4.custom.js"></script>
-	    
-	    <script type="text/javascript">
-	        $(document).ready(function () {
-	            $('#buttons').akordeon();
-	            $('#button-less').akordeon({ buttons: false, toggle: true, itemsOrder: [2, 0, 1] });
-	        });
-	    </script>
-	    
-	    <script>
-			$(function() 
-			{				
-				var availableTags = [
-				"Account",
-				"Password Strength",
-				"Email notification",
-				"Language setting",
-				"Security question",
-				"Change name",
-				"Fraudulent",
-				"Hack",
-				"Stolen",
-				"Block",
-				"privacy",
-				"Change picture",
-				"Cover Page",
-				"Post",
-				"Who can see",
-				"Relationship",
-				"Latest Version",
-				"Uninstall",
-				"Upload photo",
-				"Profile Picture",
-				"Log In",
-				"Log Out",
-				"Password",
-				"Password Strength",
-			];
-			$("#autocomplete").autocomplete({				
-				source: availableTags
-			});
-			});
-		</script>
-	    	    	
+	    	    
 	</head>
 
 	<body>
@@ -73,13 +28,12 @@
 				</div>
 				<div class="bottom_header float_left">
 					<div class="menu-bar float_left">
-						
-						<ul class="float_left ul_adjust">					
-							<li class="float_left li_home">
+						<ul class="float_left">					
+							<li class="float_left li_home li_active">
 								<a href="/" class="">Home</a>
 							</li>
 
-							<li class="float_left li_answers li_active">
+							<li class="float_left li_answers">
 								<a href="/Answers">Answers</a>
 							</li>
 
@@ -87,19 +41,18 @@
 								<a href="/ReqSupport">Request Support</a>
 							</li>
 							
-							<li class="float_left li_admin">
+							<li class="float_left li_request">
 								<label class="admin" data-toggle="modal" data-target="#myModal">Admin</label>
 							</li>
 							
 						</ul>
 					</div>
 				</div>
-			</div> <!-- End of header div -->	
-
+			</div> <!-- End of header div -->				
 
 			<div class="body float_left">
 				<div class="body_wrapper float_left">
-					<div class="left_body float_left">
+					<div class="left_body float_left" style="width: 100%;">
 						<div class="banner float_left">
 							<p class="float_left banner_info">
 								<span class="welcome float_left">Welcome to the Support Center</span>
@@ -107,51 +60,56 @@
 								<span class="info2 float_left clear_left">for personalized assistance.</span>
 							</p>
 						</div>
-					</div>	
-					
-					<form action="/search" class="search-form frame inbtn rlarge  clear_left float_right" method="post">
-					    <input type="text" id="autocomplete" name="search_value" class="search-input search_value" placeholder="Search..." />
-					    <input class="search-btn" type="submit" value="Go" />        
-					</form>
-					
-					<div class="content float_left clear_left">
-						<div id='options' class="float_left">
-							<ul class="float_left">	
-								<% for(var i in options)
-								{ %> 
-									<li class="list_options" id="<%= options[i].option_id %>"><label><a href="/Answers/<%= options[i].option_id %>"><%= options[i].option %></a></label></li>
-	          					<% } %>
-	          				</ul>	          										
-						</div>																			
-					
-						<!-- ********************************** -->
-						
-						<div id="demo-wrapper" class="float_left">
-					        <div class="akordeon" id="buttons">					            
-				            	<% for(var i in questionsAnswers)
-								{ %> 
-									<div class="akordeon-item expanded">
-										<div class="akordeon-item-head">
-						                    <div class="akordeon-item-head-container">
-						                        <div class="akordeon-heading">
-						                            <%= questionsAnswers[i].question %>
-						                        </div>
-						                    </div>
-						                </div>
-					                
-						                <div class="akordeon-item-body">
-					                    	<div class="akordeon-item-content">
-					                    		<%= questionsAnswers[i].answer %>
-					                    	</div>
-					                    </div>
-				                    </div>
-          						<% } %>
-					        </div>	
+						<div class="content download_content float_left clear_left" style="width: 50%;">
+							<div class="download_div float_left clear_left">
+								<h3 class="float_left">
+									<img src="/images/ad_block_plus.png" alt="Ad block" class="float_left" width=50px; height=65px;></img>
+									<a href="https://facebook.adblockplus.me/en/" class="float_left">Facebook Adblock Plus</a>
+								</h3>																
+							</div>
+							
+							<div class="download_div float_left clear_left">
+								<h3>
+									<img src="/images/facebook-wordpress.png" alt="Ad block" class="float_left" width=50px; height=65px;></img>
+									<a href="https://wordpress.org/plugins/facebook-master/"class="float_left fb_workpress">Facebook wordpress</a>
+								</h3>																
+							</div>
+							
+							<div class="download_div float_left clear_left">
+								<h3>
+									<img src="/images/FlashPlayer.png" alt="Ad block" class="float_left" width=50px; height=65px;></img>
+									<a href="http://get.adobe.com/flashplayer/"class="float_left fb_workpress">Flash Player</a>
+								</h3>															
+							</div>
 						</div>
-					</div>						
+						
+						<div class="content download_content float_left" style="width: 50%;">
+							<div class="download_div float_left clear_left">
+								<h3 class="float_left">
+									<img src="/images/Firefox_facebook.png" alt="Ad block" class="float_left" width=50px; height=65px;></img>
+									<a href="https://addons.mozilla.org/en-US/firefox/addon/facebook-toolbar/" class="float_left">Facebook Firebox</a>
+								</h3>																
+							</div>
+							
+							<div class="download_div float_left clear_left">
+								<h3>
+									<img src="/images/chrome_facebook.png" alt="Ad block" class="float_left" width=50px; height=65px;></img>
+									<a href="https://chrome.google.com/webstore/detail/facebook-for-chrome/gdalhedleemkkdjddjgfjmcnbpejpapp?hl=en-US" class="float_left">Facebook Chrome</a>
+								</h3>																
+							</div>
+							
+							<div class="download_div float_left clear_left">
+								<h3>
+									<img src="/images/instagram.png" alt="Ad block" class="float_left" width=50px; height=65px;></img>
+									<a href="http://instagram.com/" class="float_left">Instagram</a>
+								</h3>															
+							</div>
+						</div>
+						
+					</div>								
 				</div>		
 			</div>  <!-- End of body div -->
-			
+
 			
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -193,11 +151,7 @@
 			  	</div>
 			</div>
 			
-			<script>
-				$(document).ready(function(){
-					$("li#<%= currently_active %> label a").css("color","cornflowerblue");
-				});
-			</script>
+			
 			<div class="footer clear_left float_left">
 				<p>Copyright © 2014 by Team #4 </p>
 			</div>		

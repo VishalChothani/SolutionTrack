@@ -27,8 +27,8 @@
 
 .body_wrapper .content #options
 {
-	width: 15%;
-	margin-left:15px;
+	width: 20%;
+	margin-left:25px;
 }
 
 #options ul li label
@@ -47,7 +47,7 @@
 {
 	float:none;
 	padding:10px;
-	border-bottom:1px solid #074e68;
+	border-bottom:1px solid white;
 	list-style: none;
 }
 
@@ -64,7 +64,7 @@
 
 li.list_options label a
 {
-	color: #074e68;
+	color: white;
 	text-decoration: none;
 }
 
@@ -109,9 +109,4 @@ p.msg_send_ack
 	font-size: 23px;
 	margin: 0px;
 	margin-bottom: 6px;
-}
-
-.wrapper .menu-bar ul.admin_ul
-{
-	padding: 0px;
 }

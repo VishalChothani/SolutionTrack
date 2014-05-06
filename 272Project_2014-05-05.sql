@@ -10,18 +10,8 @@
 # Generation Time: 2014-05-05 07:29:34 +0000
 # ************************************************************
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Dump of table login_details
-# ------------------------------------------------------------
+CREATE DATABASE 272Project;
+USE 272Project;
 
 DROP TABLE IF EXISTS `login_details`;
 
@@ -33,18 +23,11 @@ CREATE TABLE `login_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `login_details` WRITE;
-/*!40000 ALTER TABLE `login_details` DISABLE KEYS */;
 
 INSERT INTO `login_details` (`id`, `username`, `password`)
 VALUES
 	(1,'team4.272.2014@gmail.com','VishalChothani');
 
-/*!40000 ALTER TABLE `login_details` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table option_question_answer
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `option_question_answer`;
 
@@ -57,9 +40,6 @@ CREATE TABLE `option_question_answer` (
   KEY `option_id_fk` (`option_id`),
   CONSTRAINT `option_id_fk` FOREIGN KEY (`option_id`) REFERENCES `options` (`option_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-LOCK TABLES `option_question_answer` WRITE;
-/*!40000 ALTER TABLE `option_question_answer` DISABLE KEYS */;
 
 INSERT INTO `option_question_answer` (`oqa_id`, `option_id`, `question`, `answer`)
 VALUES
@@ -93,13 +73,6 @@ VALUES
 	(28,6,'How many photos can I upload?','You can upload about 1000 photos per album.\n'),
 	(29,6,'How do I upload high resolution photos?','For better quality photos, check the High Quality box when you create an album.\n');
 
-/*!40000 ALTER TABLE `option_question_answer` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table options
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `options`;
 
 CREATE TABLE `options` (
@@ -107,9 +80,6 @@ CREATE TABLE `options` (
   `option` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`option_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-LOCK TABLES `options` WRITE;
-/*!40000 ALTER TABLE `options` DISABLE KEYS */;
 
 INSERT INTO `options` (`option_id`, `option`)
 VALUES
@@ -120,12 +90,6 @@ VALUES
 	(5,'Facebook Mobile'),
 	(6,'Sharing');
 
-/*!40000 ALTER TABLE `options` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table question_set
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `question_set`;
 
@@ -141,9 +105,6 @@ CREATE TABLE `question_set` (
   CONSTRAINT `ticket_id_fk` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`ticket_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `question_set` WRITE;
-/*!40000 ALTER TABLE `question_set` DISABLE KEYS */;
-
 INSERT INTO `question_set` (`question_id`, `ticket_id`, `topic`, `question`, `reply`, `timestamp`)
 VALUES
 	(1,1,'Login','How to login',NULL,NULL),
@@ -151,12 +112,6 @@ VALUES
 	(3,3,'pages','how to create pages in FB',NULL,NULL),
 	(4,4,'pages','how to create pages in FB',NULL,NULL);
 
-/*!40000 ALTER TABLE `question_set` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table ticket
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `ticket`;
 
@@ -172,22 +127,14 @@ CREATE TABLE `ticket` (
   CONSTRAINT `user_id_pk` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `ticket` WRITE;
-/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
 
 INSERT INTO `ticket` (`ticket_id`, `user_id`, `status`, `urgency`, `sub_time`, `expiry_date`)
 VALUES
 	(1,1,'working','Low','May 4 2014 5:56 PM','May 7 2014 5:56 PM'),
-	(2,1,'working','Low','May 4 2014 5:56 PM','May 7 2014 5:56 PM'),
-	(3,2,'working','Medium','May 4 2014 5:56 PM','May 7 2014 5:56 PM'),
-	(4,2,'working','Medium','May 4 2014 5:56 PM','May 7 2014 5:56 PM');
+	(2,1,'working','Low','May 4 2014 5:58 PM','May 7 2014 5:58 PM'),
+	(3,2,'working','Medium','May 4 2014 5:58 PM','May 7 2014 5:58 PM'),
+	(4,2,'working','Medium','May 4 2014 5:59 PM','May 7 2014 5:59 PM');
 
-/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table user_info
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user_info`;
 
@@ -198,22 +145,8 @@ CREATE TABLE `user_info` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `user_info` WRITE;
-/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-
 INSERT INTO `user_info` (`user_id`, `username`, `email`)
 VALUES
 	(1,'Vishal','vishal.k.chothani@gmail.com'),
 	(2,'mahesh','mahesh.bingi@gmail.com');
 
-/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

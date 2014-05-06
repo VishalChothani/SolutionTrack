@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <title>Welcome Page</title>	
+	    <title>Request Support Page</title>	
 		<link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />	
 		<link rel="stylesheet" href="/stylesheets/common_style.css">	
-		<link rel="stylesheet" href="/stylesheets/admin.css"> 
-				
+		<link rel="stylesheet" href="/stylesheets/admin.css">
+		
 		<link href="/stylesheets/jquery.akordeon.css" rel="stylesheet" type="text/css" />
 	    <link href="/stylesheets/demo.css" rel="stylesheet" type="text/css" />
 	    
@@ -13,18 +13,7 @@
 	    <script src="/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/js/bootstrap.js" type="text/javascript"></script>
 	    <script src="/js/jquery.akordeon.js" type="text/javascript"></script>
-	    
-	    <script type="text/javascript">
-	        $(document).ready(function () {
-	            $('#buttons').akordeon();
-	            $('#button-less').akordeon({ buttons: false, toggle: true, itemsOrder: [2, 0, 1] });
-	            
-	            <% if(login_error!="") 
-	            { %>
-	            	alert('Wrong Credentials');	            	
-	            <% } %>
-	        });
-	    </script>
+	    	    
 	</head>
 
 	<body>
@@ -40,7 +29,7 @@
 				<div class="bottom_header float_left">
 					<div class="menu-bar float_left">
 						<ul class="float_left">					
-							<li class="float_left li_home li_active">
+							<li class="float_left li_home ">
 								<a href="/" class="">Home</a>
 							</li>
 
@@ -48,56 +37,32 @@
 								<a href="/Answers">Answers</a>
 							</li>
 
-							<li class="float_left li_request">
+							<li class="float_left li_request li_active">
 								<a href="/ReqSupport">Request Support</a>
-							</li>
+							</li>	
 							
-							<li class="float_left li_admin">
+							<li class="float_left li_request">
 								<label class="admin" data-toggle="modal" data-target="#myModal">Admin</label>
-							</li>
-							
+							</li>						
 						</ul>
 					</div>
 				</div>
-			</div> <!-- End of header div -->				
+			</div> <!-- End of header div -->	
+
 
 			<div class="body float_left">
 				<div class="body_wrapper float_left">
 					<div class="left_body float_left">
-						<div class="banner float_left">
+						<div class="banner thanx_msg float_left">
 							<p class="float_left banner_info">
-								<span class="welcome float_left">Welcome to the Support Center</span>
-								<span class="info1 float_left clear_left">Please search for information or Submit a Ticket in order</span>
-								<span class="info2 float_left clear_left">for personalized assistance.</span>
+								<span class="welcome float_left">Thank you for using Soution Track</span>
+								<span class="info1 float_left clear_left">We have got your message and we will reply you as soon as possible</span>								
 							</p>
-						</div>
-						<div class="content float_left clear_left">
-							<ul class="float_left content_information">					
-								<li class="float_left">
-									<img src="/images/knowledge_base.jpg">
-									<div class="details">
-										<p><a href="/Answers">Knowledge base</a></p>							
-										<p>Browse or search the Knowledge base for a wide variety of solutions.</p>
-									</div>
-								</li>
-									
-								<li class="float_left">
-									<img src="/images/tickets.png">
-									<div class="details">
-										<p><a href="/SubmitTicket">Submit a Ticket</a></p>						
-										<p>Submit a trouble ticket to our service representatives. You can track the status of your ticket in My Support.</p>
-									</div>
-								</li>
-																
-							</ul>	
-						</div>
+						</div>						
 					</div>								
 				</div>		
 			</div>  <!-- End of body div -->
-			
-			<!-- <object data=http://54.187.56.188:3022/ width="600" height="400"> <embed src=http://54.187.56.188:3022/ width="600" height="400"> </embed> Error: Embedded data could not be displayed. </object> -->
 
-			
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  	<div class="modal-dialog">
@@ -125,7 +90,8 @@
 				
 				        		<div class="control-group login_div control_login float_left clear_left login_divButtonDiv">
 				          			<div class="controls">
-				            		<button type="submit" class="btn" name="login" id="login_button">Log In</button>				          
+				            		<button type="submit" class="btn" name="login" id="login_button">Log In</button>
+				            		<label id="login_error"></label>
 				          			</div>
 				          		</div>    		          				          	
 				          		    	              
@@ -137,7 +103,6 @@
 			    	</div>
 			  	</div>
 			</div>
-			
 			
 			<div class="footer clear_left float_left">
 				<p>Copyright © 2014 by Team #4 </p>

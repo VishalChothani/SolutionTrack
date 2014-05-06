@@ -6,7 +6,7 @@
 	<meta name="description" content="" />
 	<meta charset="utf-8">
 	
-	<link rel="stylesheet" href="/stylesheets/common_style.css">	
+	<link rel="stylesheet" href="/stylesheets/common_style.css">
 	<link rel="stylesheet" href="/stylesheets/admin.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/dhtmlxgrid.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/dhtmlxgrid_dhx_terrace.css">
@@ -34,7 +34,7 @@
 				</div>
 				<div class="bottom_header float_left">
 					<div class="menu-bar float_left">
-						<ul class="float_left admin_ul">					
+						<ul class="float_left">					
 							<li class="float_right">
 								<a href="/Logout" class="">Logout</a>
 							</li>
@@ -44,16 +44,9 @@
 			</div> <!-- End of header div -->	
 
 		
-		<section class="section_container float_left">			
+		<section class="section_container float_left">
+			<p class="float_left msg_send_ack"><%= success %></p>
 			<section class="section_current">
-				<label style="color: white; font-size: 14px;">Note :- Double click on the ticket to reply</label>
-				<script>				
-				<% if(success!="")
-					{ %>
-						 alert("Message sent successfully"); 
-				<%	}
-				%>
-				</script>
 				<div id="admin_grid" style="width:950px;height:250px;background-color:white;overflow:hidden">
 					</div>
 					<br>
@@ -96,7 +89,8 @@
 									type: 'POST',
 					        		url: '/getTicketInformation',
 					        		data: data,
-					    		}).done(function(response) {					    			
+					    		}).done(function(response) {
+					    			alert(JSON.stringify(response));
 					    			for(i in response)
 					    			{
 					    				jQuery(".ticket_id").val(response[0].ticket_id);
