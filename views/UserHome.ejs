@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+</html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script>
+$(document).ready(function(){ 
+  $("#flip").click(function(){  
+    $("#panel").toggle();
+   });
+});
+
+</script>
+
+<script>
+$(function () {
+    $(document).ready(function () {
+        // Build the chart
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Browser market shares at a specific website, 2014'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: [
+                    ['Parking',   45.0],
+                    ['Maintenance',       26.8],
+                    {
+                        name: 'Noise',
+                        y: 12.8,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['Alarm',    8.5],
+                    ['Suspecious',     6.2],
+                    ['Property Damage',   0.7],
+                    ['Vehicle',   20]
+                ]
+            }]
+        });
+    });
+
+});
+
+</script>
+
+
+<style>
+
+#wc
+{
+color:green;
+}
+
+#bar 
+{
+text-align : center;
+font-size: 125%;
+}
+
+#productTable
+{
+border: 1px solid black;
+float:left;
+height: 60px;
+width: 600px;
+margin-left: 5%;
+font-size: 100%;
+}
+
+
+
+#panel,#flip
+{
+font-size:15px;
+width:300px;
+padding:5px;
+text-align:center;
+background-color:#d3d3d3;
+clear:both;
+float:right;
+}
+
+#panel{
+border-collapse: collapse;
+length:1000px;
+display:none;
+padding:5px;
+}
+
+table{
+border-collapse: collapse;
+}
+</style>
+</head>
+
+<body>
+<h3 id="wc">Welcome </h3>
+
+<div id="bar" float="right">
+<a href="/History">History</a> |
+<a href="/About">About Us</a> |
+<a href="/Help"> Help</a>
+</div></br></br></br>
+
+<div id="flip">
+ <b>Add Property</b>
+</div>
+
+<div id="panel">
+<form method="post" action="/AddProperty">
+<table>
+	<tr><td><b>*Property Number</b></td><td><input type="text" id="propertyno" name="propertyno" required></td></tr>
+    <tr><td><b>*Property Name</b></td>  <td><input type="text" id="propertyname" name="propertyname" required></td></tr>
+    <tr><td><b>*Contact Name</td>		<td><input type="text" id="contactname" name="contactname" required></td></tr>
+    <tr><td><b>*Contact Number</b></td> <td><input type="text" id="contactno" name="contactno" required></td></tr>
+    <tr><td><b>*Address</b></td>		<td><input type="text" id="address" name="address" required></td></tr>
+    <tr><td><b>*Comments</b></td>		<td><input type="text" id="comments" name="comments" required></td></tr>
+    <tr><td><b>*Update Date</b></td>	<td><input type="text" id="updatedate" name="updatedate" required></td></tr>
+    <tr><td><b>*Property Details</b></td><td><input type="text" id="propdetails" name="propdetails" required></td></tr>
+<tr><td></td><td><button id="b1" type="submit">Add Property</button></td></tr> 
+</table>
+</form>
+</div>
+
+<table id="productTable" border="1"  >
+<tr><td>Property Number</td>
+<td>Property Name</td>
+<td>Contact Name</td>
+<td>Contact Number</td>
+<td>Address</td>
+<td>Comments</td>
+<td>Update Date</td>
+<td>Property Details</td>
+</tr>
+
+<%for(i in property)
+{
+%>
+<tr>
+<td><%=property[i].PROPERTY_NO%></td>
+<td><%=property[i].PROPERTY_NAME%></td>
+<td><%=property[i].CONTACT_NAME%></td>
+<td><%=property[i].CONTACT_NUMBER%></td>
+<td><%=property[i].ADDRESS%></td>
+<td><%=property[i].COMMENTS%></td>
+<td><%=property[i].UPDATE_DATE%></td>
+<td><%=property[i].PROPERTY_DETAILSCOL%></td>
+</tr>
+<%}%>
+</table></br></br></br></br></br></br></br></br></br></br></br></br>
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+.email_error, .first_name_error, .last_name_error, .register_error
+{
+	display: none;
+	margin: 10px 0px;
+}

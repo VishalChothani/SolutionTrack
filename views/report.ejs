@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Report page</title>
+    
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <% include dashboard_header.ejs %>
+        <div id="page-wrapper" class="manual-height">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Report
+                        </h1>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-book fa-fw"></i>Report Area
+                                    <label class="get_proprty_id pull-right" id="<%= property_id %>"><a data-toggle="modal" data-target="#modal_more_info">Overall Report</a></label>
+                                </h3>
+                                
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart">                                	
+                                    <div role="tabpanel">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <!-- <li role="presentation"><a href="#daily" aria-controls="account" role="tab" data-toggle="tab">Daily Report</a></li> -->
+                                            <li role="presentation" class="active"><a href="#incident" aria-controls="policy" role="tab" data-toggle="tab">Incident Report</a></li> 
+                                            <!-- <li role="presentation"><a href="#monthly" aria-controls="term" role="tab" data-toggle="tab">Monthly Report</a></li> -->
+                                            <li role="presentation"><a href="#parking" aria-controls="policy" role="tab" data-toggle="tab">Parking Violation</a></li> 
+                                            <li role="presentation"><a href="#tresspassing" aria-controls="policy" role="tab" data-toggle="tab">Tresspassing</a></li> 
+                                            <li role="presentation"><a href="#maintenance" aria-controls="policy" role="tab" data-toggle="tab">Maintenance</a></li> 
+                                            <li role="presentation"><a href="#call_of_service" aria-controls="policy" role="tab" data-toggle="tab">Call of Service</a></li> 
+                                        </ul>
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane" id="daily">
+                    			                <div class="row">
+                    			                    <div class="col-lg-12">
+                                                        <table class="table" id="daily_table">
+                                                            <thead>
+                                                                <tr>
+                                                                	<th>Date</th>
+                                                                    <th>Officer</th>
+                                                                    <th>Badge Number</th>
+                                                                    <th>Summary</th>
+                                                                    <th>Action</th>                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                
+                                								<tr>
+                                									<td>2015-16-08</td>
+                                									<td class="get_id" id="1"><a data-toggle="modal" data-target="#modal_more_info">Vishal</a></td>
+                                									<td>1991</td>
+                                									<td>Problem</td>
+                                									<td>Serious</td>
+                                								</tr>
+                                								<tr>
+                                									<td>2015-16-08</td>
+                                									<td class="get_id" id="2"><a data-toggle="modal" data-target="#modal_more_info">Amit</a></td>
+                                									<td>1989</td>
+                                									<td>Garbage</td>
+                                									<td>Minor</td>
+                                								</tr>
+                                								<tr>
+                                									<td>2015-16-08</td>
+                                									<td class="get_id" id="3"><a data-toggle="modal" data-target="#modal_more_info">Harleen</a></td>
+                                									<td>1988</td>
+                                									<td>Maintances</td>
+                                									<td>Major</td>
+                                								</tr>	
+                                								<tr>
+                                									<td>2015-16-08</td>
+                                									<td class="get_id" id="4"><a data-toggle="modal" data-target="#modal_more_info">Sambu</a></td>
+                                									<td>1901</td>
+                                									<td>Robery</td>
+                                									<td>Serious</td>
+                                								</tr>							
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                            <div role="tabpanel" class="tab-pane active" id="incident">                                
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <% if(incident_report.length==0){ %>
+                                                            <div class="col-lg-12 col-xs-12">
+                                                                <p class="margin-top-15"><label> No Incident has been reported </label></p>
+                                                            </div>
+                                                        <% }
+                                                        else { %>
+                                                        <table class="table" id="incident_table">
+                                                            <thead>
+                                                                <tr>
+                                                                	<th>Date</th>
+                                                                    <th>Description</th>
+                                                                    <th>Location</th>
+                                                                    <th>Status</th>
+                                                                    <th>Details</th>                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                
+                                								<%for(i in incident_report)
+                                                                {
+                                                                %>
+                                                                    <tr>                                        
+                                                                        <td><%=incident_report[i].date%></td>
+                                                                        <td><%=incident_report[i].description%></td>
+                                                                        <td><%=incident_report[i].location%></td>
+                                                                        <td><%=incident_report[i].status%></td>
+                                                                        <td class="get_report_id" id="<%=incident_report[i].rpno%>"><a data-toggle="modal" data-target="#modal_more_incident_info">Click of more details</a></td>
+                                                                    </tr>
+                                                                <%}%>							
+                                                            </tbody>
+                                                            
+                                                        </table>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div role="tabpanel" class="tab-pane" id="monthly">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <table class="table" id="monthly_table">
+                                                            <thead>
+                                                                <tr>
+                                                                <th>Property</th>
+                                                                <th>Date</th>
+                                                                    <th>Summary</th>                                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                
+                                								<tr>
+                                								<td>Property 1</td>
+                                								<td>04/16/2015</td>
+                                								<td>Problem</td>
+                                								</tr>
+                                								<tr>
+                                								<td>Property 2</td>
+                                								<td>04/16/2015</td>
+                                								<td>Problem</td>
+                                								</tr>
+                                								<tr>
+                                								<td>Property 3</td>
+                                								<td>04/16/2015</td>
+                                								<td>Problem</td>
+                                								</tr>
+                                								<tr>
+                                								<td>Property 4</td>
+                                								<td>04/16/2015</td>
+                                								<td>Problem</td>
+                                								</tr>
+                                                            </tbody>                            
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div role="tabpanel" class="tab-pane" id="parking">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <% if(parking_violation.length==0){ %>
+                                                            <div class="col-lg-12 col-xs-12">
+                                                                <p class="margin-top-15"><label> No Parking Violation has been reported </label></p>
+                                                            </div>
+                                                        <% }
+                                                        else { %>
+                                                            <table class="table" id="parking_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Date</th>
+                                                                        <th>Description</th>
+                                                                        <th>Location</th>
+                                                                        <th>Status</th>
+                                                                        <th>Details</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>                                
+                                                                    <%for(i in parking_violation)
+                                                                    {
+                                                                    %>
+                                                                        <tr>                                        
+                                                                            <td><%=parking_violation[i].date%></td>
+                                                                            <td><%=parking_violation[i].description%></td>
+                                                                            <td><%=parking_violation[i].location%></td>
+                                                                            <td><%=parking_violation[i].status%></td>
+                                                                            <td class="get_report_id" id="<%=parking_violation[i].rpno%>"><a data-toggle="modal" data-target="#modal_more_incident_info">Click of more details</a></td>
+                                                                        </tr>
+                                                                    <%}%>
+                                                                </tbody>                            
+                                                            </table>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div role="tabpanel" class="tab-pane" id="tresspassing">                                
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <% if(tresspassing.length==0){ %>
+                                                            <div class="col-lg-12 col-xs-12">
+                                                                <p class="margin-top-15"><label> No Incident has been reported </label></p>
+                                                            </div>
+                                                        <% }
+                                                        else { %>
+                                                        <table class="table" id="tresspassing_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Date</th>
+                                                                    <th>Description</th>
+                                                                    <th>Location</th>
+                                                                    <th>Status</th>
+                                                                    <th>Details</th>                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                
+                                                                <%for(i in tresspassing)
+                                                                {
+                                                                %>
+                                                                    <tr>                                        
+                                                                        <td><%=tresspassing[i].date%></td>
+                                                                        <td><%=tresspassing[i].description%></td>
+                                                                        <td><%=tresspassing[i].location%></td>
+                                                                        <td><%=tresspassing[i].status%></td>
+                                                                        <td class="get_report_id" id="<%=tresspassing[i].rpno%>"><a data-toggle="modal" data-target="#modal_more_incident_info">Click of more details</a></td>
+                                                                    </tr>
+                                                                <%}%>                           
+                                                            </tbody>
+                                                            
+                                                        </table>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div role="tabpanel" class="tab-pane" id="maintenance">                                
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <% if(maintenance.length==0){ %>
+                                                            <div class="col-lg-12 col-xs-12">
+                                                                <p class="margin-top-15"><label> No Incident has been reported </label></p>
+                                                            </div>
+                                                        <% }
+                                                        else { %>
+                                                        <table class="table" id="maintenance_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Date</th>
+                                                                    <th>Description</th>
+                                                                    <th>Location</th>
+                                                                    <th>Status</th>
+                                                                    <th>Details</th>                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                
+                                                                <%for(i in maintenance)
+                                                                {
+                                                                %>
+                                                                    <tr>                                        
+                                                                        <td><%=maintenance[i].date%></td>
+                                                                        <td><%=maintenance[i].description%></td>
+                                                                        <td><%=maintenance[i].location%></td>
+                                                                        <td><%=maintenance[i].status%></td>
+                                                                        <td class="get_report_id" id="<%=maintenance[i].rpno%>"><a data-toggle="modal" data-target="#modal_more_incident_info">Click of more details</a></td>
+                                                                    </tr>
+                                                                <%}%>                           
+                                                            </tbody>
+                                                            
+                                                        </table>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            
+
+                                            <div role="tabpanel" class="tab-pane" id="call_of_service">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <% if(call_of_service.length==0){ %>
+                                                            <div class="col-lg-12 col-xs-12">
+                                                                <p class="margin-top-15"><label> No Incident has been reported </label></p>
+                                                            </div>
+                                                        <% }
+                                                        else { %>
+                                                        <table class="table" id="call_of_service_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Date</th>
+                                                                    <th>Description</th>
+                                                                    <th>Location</th>
+                                                                    <th>Status</th>
+                                                                    <th>Details</th>                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                
+                                                                <%for(i in call_of_service)
+                                                                {
+                                                                %>
+                                                                    <tr>                                        
+                                                                        <td><%=call_of_service[i].date%></td>
+                                                                        <td><%=call_of_service[i].description%></td>
+                                                                        <td><%=call_of_service[i].location%></td>
+                                                                        <td><%=call_of_service[i].status%></td>
+                                                                        <td class="get_report_id" id="<%=call_of_service[i].rpno%>"><a data-toggle="modal" data-target="#modal_more_incident_info">Click of more details</a></td>
+                                                                    </tr>
+                                                                <%}%>                           
+                                                            </tbody>
+                                                            
+                                                        </table>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+
+                                        </div>                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="modal_more_info">
+        <div class="modal-dialog">
+            <div class="modal-content col-lg-12 col-md-12 col-xs-12">
+                <div class="modal-header col-lg-12 col-md-12 col-xs-12">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Information</h4>
+                </div>
+                <div id="editor"></div>
+                <div class="modal-body col-lg-12 col-md-12 col-xs-12">
+
+                    <button type="button" class="download_info">Download</button>
+
+                    <div class="download_outline col-lg-12 col-md-12 col-xs-12">
+                        <div class="padding_border download_header col-lg-12 col-md-12 col-xs-12">  
+                            <div class="header_form col-lg-3 col-md-3 col-xs-3">
+                                <p><label>SECURITY REPORT</label></p>
+                            </div>
+                            <div class="header_logo col-lg-3 col-md-3 col-xs-3">
+                                <p><label>LOGO</label></p>
+                            </div>
+                            <div class="header_address col-lg-6 col-md-6 col-xs-6">
+                                <p><label>101 E San Fernando St</label></p>
+                                <p><label>San Jose, CA 95112</label></p>
+                                <p><label>vishal.k.chothani@gmail.com</label></p>
+                                <p><label>4086469837</label></p>
+                            </div>                            
+                        </div>
+
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="download_property_name col-lg-3 col-md-3 col-xs-3">
+                                <p>
+                                    <label>PROPERTY Name</label>
+                                </p>
+                                <p>
+                                    <label class="property_name_value"> Name </label>
+                                </p>
+                            </div>
+                            <div class="download_date col-lg-3 col-md-3 col-xs-3">
+                                <p>
+                                    <label>Date</label>
+                                </p>
+                                <p>
+                                    <label class="date_value"> 06/12/2016 </label>
+                                </p>
+                            </div>
+                            <div class="download_officer_name col-lg-6 col-md-6 col-xs-6">
+                                <p>
+                                    <label>Property Address</label>
+                                </p>
+                                <p>
+                                    <!-- <span class="officer_name_download"></span>
+                                    <span class="badge_number_download"></span> -->
+                                    <label class="property_address_value"> 06/12/2016 </label>
+                                </p>
+                            </div>    
+                        </div>
+
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <p><label>Activity Checklist</label></p>
+                            </div>
+                            <div class="activity_instruction col-lg-12 col-md-12 col-xs-12">
+                                <p>
+                                    <label>(IF ANY OF THE FOLLOWING ITEMS HAS A TALLY, PLEASE REFER TO THE 
+                                    SUMMARY BELOW FOR DETAILS)</label>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="padding_border property_details patrols_activity col-lg-12 col-md-12 col-xs-12">  
+                            <div class="col-lg-5 col-md-5 col-xs-5 download_property_name">
+                                <p><label>Patrols</label></p>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Timing</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Anna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Debbie</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>John</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-xs-7">    <!-- try class "partition_activity_patrols" -->
+                                <p><label>Activity</label></p>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>                                            
+                                            <th>Type</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>INCIDENT REPORTS</td>
+                                            <td class="incident_report_count">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PARKING VIOLATIONS</td>
+                                            <td class="parking_violations_count">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>MAINTENANCE</td>
+                                            <td class="maintenance_count">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CALLS FOR SERVICE</td>
+                                            <td class="calls_for_service_count">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="activity_title col-lg-12 col-md-12 col-xs-12">
+                                <p><label>Incident Report</label></p>
+                            </div>
+                            <div class="activity_instruction incident_report_info col-lg-12 col-md-12 col-xs-12">
+                                <p>
+                                    <label class="incident_report_no">No Incident Reports for this Daily Report</label>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="activity_title col-lg-12 col-md-12 col-xs-12">
+                                <p><label>Parking Violations</label></p>
+                            </div>
+                            <div class="activity_instruction parking_violations_info col-lg-12 col-md-12 col-xs-12">
+                                <p>
+                                    <label class="parking_violations_no">No Incident Reports for this Daily Report</label>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="activity_title col-lg-12 col-md-12 col-xs-12">
+                                <p><label>Maintenance Calls</label></p>
+                            </div>
+                            <div class="activity_instruction maintenance_calls_info col-lg-12 col-md-12 col-xs-12">
+                                <p>
+                                    <label class="maintenance_calls_no">No Incident Reports for this Daily Report</label>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="activity_title col-lg-12 col-md-12 col-xs-12">
+                                <p><label>Calls For Service</label></p>
+                            </div>
+                            <div class="activity_instruction call_for_service_info col-lg-12 col-md-12 col-xs-12">
+                                <p>
+                                    <label class="call_for_service_no">No Incident Reports for this Daily Report</label>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="activity_title col-lg-12 col-md-12 col-xs-12">
+                                <p><label>Patrols</label></p>
+                            </div>
+                            <div class="activity_instruction col-lg-12 col-md-12 col-xs-12">
+                                <p>
+                                    <label class="patrols_info">No Incident Reports for this Daily Report</label>
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="modal fade"  id="modal_more_incident_info" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">    
+        <div class="modal-dialog">
+            <div class="modal-content col-lg-12 col-md-12 col-xs-12">
+                <div class="modal-header col-lg-12 col-md-12 col-xs-12">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Information</h4>
+                </div>
+                <div id="editor"></div>
+                <div class="modal-body col-lg-12 col-md-12 col-xs-12">
+                    <button type="button" class="download_info">Download</button>
+                    <div class="download_outline col-lg-12 col-md-12 col-xs-12">
+                        <div class="padding_border download_header col-lg-12 col-md-12 col-xs-12">  
+                            <div class="header_form col-lg-3 col-md-3 col-xs-3">
+                                <p><label>REPORT</label></p>
+                            </div>
+                            <div class="header_logo col-lg-3 col-md-3 col-xs-3">
+                                <p><label>LOGO</label></p>
+                            </div>
+                            <div class="header_address col-lg-6 col-md-6 col-xs-6">
+                                <p><label>101 E San Fernando St</label></p>
+                                <p><label>San Jose, CA 95112</label></p>
+                                <p><label>vishal.k.chothani@gmail.com</label></p>
+                                <p><label>4086469837</label></p>
+                            </div>                            
+                        </div>
+
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">  
+                            <div class="download_property_name col-lg-3 col-md-3 col-xs-3">
+                                <p>
+                                    <label>Type</label>
+                                </p>
+                                <p>
+                                    <label class="report_type_value"> Type </label>
+                                </p>
+                            </div>
+                            <div class="download_date col-lg-3 col-md-3 col-xs-3">
+                                <p>
+                                    <label>Date</label>
+                                </p>
+                                <p>
+                                    <label class="report_date_value"> 06/12/2016 </label>
+                                </p>
+                            </div>
+                            <div class="download_officer_name col-lg-6 col-md-6 col-xs-6">
+                                <p>
+                                    <label>Description</label>
+                                </p>
+                                <p>
+                                    <label class="report_description"></label>
+                                </p>
+                            </div>    
+                        </div>
+
+                        <div class="padding_border property_details col-lg-12 col-md-12 col-xs-12">
+                            <label>Status</label>
+                            <label class="report_status"></label>  
+                            <img class="pull-right report_image" src="" alt="No Image for this report" width="100" height="100"/>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jsPdf/jspdf.js"></script>
+    <script src="js/jsPdf/from_html.js"></script>
+    <script src="js/jsPdf/split_text_to_size.js"></script>
+    <script src="js/jsPdf/standard_fonts_metrics.js"></script>
+    <script src="js/jsPdf/FileSaver.js"></script>
+
+    <script>
+
+        // var doc = new jsPDF();
+        // var specialElementHandlers = {
+        //     '#editor': function (element, renderer) {
+        //         return true;
+        //     }
+        // };
+
+        // $('.download_info').click(function () {
+        //     doc.fromHTML($('.modal-body').html(), 15, 15, {
+        //         'width': 170,
+        //             'elementHandlers': specialElementHandlers
+        //     });
+        //     doc.save('sample-file.pdf');
+        // });
+
+        
+
+        $(".download_info").click(function(){
+            
+            // $.ajax({                                  
+            //     type: 'POST',
+            //     url: '/download_file',
+            //     data: { 
+            //         html: $(".modal-body").html()
+            //      },
+            // }).success(function(response) {  
+            //     console.log(response);            
+            // }).error(function(response) {
+            //     alert("No");
+            // }); 
+            $("#wrapper").hide();
+            window.print();
+            $("#wrapper").show();
+
+
+        });
+
+        // $(".get_id").click(function(){
+            
+        //     $.ajax({                                  
+        //         type: 'POST',
+        //         url: '/get_particular_report_info',
+        //         data: { 
+        //             report_no: $(this).attr("id")
+        //          },
+        //     }).success(function(response) {  
+        //         console.log(response.report_info[0].ACTION);
+        //         $(".officer_name_download").text(response.report_info[0].OFFICER);
+        //         $(".badge_number_download").text(response.report_info[0].BADGE_NUMBER);
+        //         $(".summary_download").text(response.report_info[0].SUMMARY);
+        //         $(".action_download").text(response.report_info[0].ACTION);
+
+        //     }).error(function(response) {
+        //         alert("No");
+        //     }); 
+
+        // });
+
+
+        $(".get_proprty_id").click(function(){
+            
+            $.ajax({                                  
+                type: 'POST',
+                url: '/get_particular_property_info',
+                data: { 
+                    property_id: $(this).attr("id")
+                 },
+            }).success(function(response) {  
+                console.log(response);
+                
+                
+                $(".property_name_value").text(response.property_info[0].PROPERTY_NAME);
+                $(".property_address_value").text(response.property_info[0].ADDRESS);
+                $(".date_value").text(response.date);
+
+
+                $(".incident_report_count").text(response.incident_report.length);
+                $(".parking_violations_count").text(response.parking_violation.length);
+                $(".maintenance_count").text(response.maintenance.length);
+                $(".calls_for_service_count").text(response.call_of_service.length);
+
+                for(i in response.parking_violation)
+                {
+                    var j = Number(i) + 1;
+                    $(".parking_violations_no").hide();
+                    $(".parking_violations_info").append("<p>"+j+". "+response.parking_violation[i].description+"</p>");
+                }
+
+                for(i in response.incident_report)
+                {
+                    var j = Number(i) + 1;
+                    $(".incident_report_no").hide();
+                    $(".incident_report_info").append("<p>"+j+". "+response.incident_report[i].description+"</p>");
+                }
+
+                for(i in response.maintenance)
+                {
+                    var j = Number(i) + 1;
+                    $(".maintenance_calls_no").hide();
+                    $(".maintenance_calls_info").append("<p>"+j+". "+response.maintenance[i].description+"</p>");
+                }
+
+                for(i in response.call_of_service)
+                {
+                    var j = Number(i) + 1;
+                    $(".call_for_service_no").hide();
+                    $(".call_for_service_info").append("<p>"+j+". "+response.call_of_service[i].description+"</p>");
+                }
+
+
+                // $(".officer_name_download").text(response.report_info[0].OFFICER);
+                // $(".badge_number_download").text(response.report_info[0].BADGE_NUMBER);
+                // $(".summary_download").text(response.report_info[0].SUMMARY);
+                // $(".action_download").text(response.report_info[0].ACTION);
+
+            }).error(function(response) {
+                alert("No");
+            }); 
+
+        });
+
+        $(".get_report_id").click(function(){
+            
+            $.ajax({                                  
+                type: 'POST',
+                url: '/get_particular_report_info',
+                data: { 
+                    report_no: $(this).attr("id")
+                 },
+            }).success(function(response) {  
+                console.log(response);
+                console.log(response.url);
+                $(".report_type_value").text(response.report_info[0].type);
+                $(".report_date_value").text(response.report_info[0].date);
+                $(".report_description").text(response.report_info[0].description);
+                $(".report_status").text(response.report_info[0].status);
+                
+                // var image = document.createElement('img');
+                var img_src = 'data:image/png;base64,'+ response.url;
+                // image.src = 'data:image/png;base64,'+ response.url;
+                // $(".report_status").append(image);
+                $(".report_image").attr("src",img_src);
+
+
+
+            }).error(function(response) {
+                alert("No");
+            }); 
+
+        });
+
+    </script>
+    
+</body>
+
+</html>

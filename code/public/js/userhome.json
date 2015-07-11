@@ -1,9 +1,0 @@
-data = {
-    rows: [{
-        id: 1001,
-        data: ["1", "Jayesh", "Mahesh", "12.99", "AMIT","1"]
-        }, {
-        id: 1002,
-        data: ["2", "Amol", "Vishal", "0", "AMOL","2"]
-        }
-]}

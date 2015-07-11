@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Dashboard Home page</title>
+        
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/admin.css" rel="stylesheet">
+        <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <% include dashboard_header.ejs %>
+            <div id="page-wrapper" class="manual-height">
+                <div class="container-fluid">                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Dashboard <small>Statistics Overview</small>
+                            </h1>                            
+                        </div>
+                    </div>          <!-- /.row -->
+
+                    <!-- <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Chart Area</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="morris-area-chart">
+                                    
+                                    	<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                    	<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                     <div class="row">
+                        
+                           
+                                <div class="col-lg-6">
+                                    <div id="pieChart1" class="text-center"></div>    
+                                    <div class"form-control" >
+                                        <select id="propertyid" class="selectpicker form-control col-lg-6" style="top:-25px;">
+                                            <option>All</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div id="pieChart2" class="text-center"></div>    
+                                    <div class"form-control" >
+                                        <select id="type" class="selectpicker form-control col-lg-6" style="top:-25px;">
+                                            <option>All</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                
+                                
+                        
+                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                                    <div id="linechart3" class="text-center">
+                                    </div>    
+                                </div>
+                </div>
+                 <div class="row">
+                        
+                                <div class="col-lg-6">
+                                    <div id="linechart4" class="text-center">
+                                    </div>    
+                                </div>
+                                
+                                 <div class="col-lg-6">
+                                    <div id="pieChart3" class="text-center"></div>    
+                                    <div class"form-control" >
+                                        <select id="status_propertyid" class="selectpicker form-control col-lg-6" style="top:-25px;">
+                                            <option>All</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                
+                                
+                        
+                 </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>        
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js"></script>
+        <script src="../js/d3pie.min.js"></script>
+        
+        <script>
+        //********************************PIE for type of reports***************************//
+
+        var data_pieChart1;
+        var data_obj=function(label,value){
+            this.label=label;
+            this.value=value;
+        }
+        var reporttypes={};
+        var content_all=[];
+        var content={};
+        var dataset=[];
+        var pie1;
+
+        var changepiedata=function(value){
+            if(value==="All"){
+                dataset=[];
+                // alert(JSON.stringify(content_all));
+                // for(var prop in content_all)
+                //  dataset.push(new data_obj(prop,content_all[prop]));
+                // alert(JSON.stringify(dataset));
+                pie1.updateProp("data.content",content_all );
+            }
+            else{
+                dataset=[];
+                //alert(JSON.stringify(dataset));
+                for(var prop in content[value])
+                    dataset.push(new data_obj(prop,content[value][prop]));
+                //alert(JSON.stringify(dataset));
+                pie1.updateProp("data.content",dataset );
+            }
+        }
+        
+        jQuery.get('/getlist_report',function(data){
+            //alert("data is ready: "+JSON.stringify(data));
+        
+       // data_pieChart1=[{"type":"INCIDENT","propertyid":"1","count":7},{"type":"OTHERS","propertyid":"2","count":14},{"type":"PARKING_VIOLATION","propertyid":"1","count":6}];
+        //getlist_report
+        data_pieChart1=data;
+
+        option='All'
+
+        if(option==='All'){
+            for(i=0;i<data_pieChart1.length;i++){
+                if(reporttypes[data_pieChart1[i]["type"]]===undefined)
+                    reporttypes[data_pieChart1[i]["type"]]=0;
+
+                    reporttypes[data_pieChart1[i]["type"]]=reporttypes[data_pieChart1[i]["type"]]+data_pieChart1[i]["count"];
+            }
+        }
+
+       //jsObject = JSON.parse(reporttypes);
+
+       for (var prop in reporttypes) {
+        content_all.push(new data_obj(prop,reporttypes[prop]));
+        }
+        
+        //alert(JSON.stringify(content_all));
+
+        for(i=0;i<data_pieChart1.length;i++){
+            if(content[data_pieChart1[i]["propertyid"]]===undefined)
+                content[data_pieChart1[i]["propertyid"]]={};
+
+            if(content[data_pieChart1[i]["propertyid"]][data_pieChart1[i]["type"]]===undefined)
+                content[data_pieChart1[i]["propertyid"]][data_pieChart1[i]["type"]]=0;
+
+               content[data_pieChart1[i]["propertyid"]][data_pieChart1[i]["type"]]=content[data_pieChart1[i]["propertyid"]][data_pieChart1[i]["type"]]+data_pieChart1[i]["count"];
+        }
+
+        //alert(JSON.stringify(content));
+
+        doc=document.getElementById("propertyid");
+        for(var prop in content){
+            option=document.createElement("OPTION");
+            textnode=document.createTextNode(prop);
+            option.appendChild(textnode);
+            doc.appendChild(option);
+        }
+        
+
+        
+
+        pie1 = new d3pie("pieChart1", {
+            "header": {
+                "title": {
+                    "text": "Type of Reports",
+                    "fontSize": 20,
+                    "font": "open sans"
+                },
+                "titleSubtitlePadding": 0
+            },
+            "footer": {
+                "color": "#999999",
+                "fontSize": 10,
+                "font": "open sans",
+                "location": "bottom-left"
+            },
+            "size": {
+                "canvasWidth": 300,
+                "canvasHeight":350,
+                "pieOuterRadius": "70%"
+            },
+            "data": {
+                "sortOrder": "value-desc",
+                "content": content_all
+            },
+            "labels": {
+                "outer": {
+                    "format":"none"
+                },
+                "inner": {
+                    "format":"label-value1",
+                    "hideWhenLessThanPercentage": 3
+                },
+                "mainLabel": {
+                    "fontSize": 11
+                },
+                "percentage": {
+                    "color": "#ffffff",
+                    "decimalPlaces": 0
+                },
+                "value": {
+                    "color": "#adadad",
+                    "fontSize": 11
+                },
+                "lines": {
+                    "enabled": true
+                },
+                "truncation": {
+                    "enabled": true
+                }
+            },
+            "effects": {
+                "pullOutSegmentOnClick": {
+                    "effect": "linear",
+                    "speed": 400,
+                    "size": 8
+                }
+            },
+            "misc": {
+                "gradient": {
+                    "enabled": true,
+                    "percentage": 100
+                }
+            }
+        });
+
+    });
+
+
+    //*******************************PIE property wise******************************//
+
+    var data_pieChart2;
+    var pie2_reporttypes={};
+    var pie2_content_all=[];
+    var pie2_content={};
+    var pie2;
+    var pie2_dataset=[];
+
+    var changepie2data=function(value){
+        if(value==="All"){
+            pie2_dataset=[];
+            // alert(JSON.stringify(content_all));
+            // for(var prop in content_all)
+            //  dataset.push(new data_obj(prop,content_all[prop]));
+            // alert(JSON.stringify(dataset));
+            pie2.updateProp("data.content",pie2_content_all );
+        }
+        else{
+            pie2_dataset=[];
+            //alert(JSON.stringify(dataset));
+            for(var prop in pie2_content[value])
+                pie2_dataset.push(new data_obj("Propertyid:"+prop,pie2_content[value][prop]));
+            //alert(JSON.stringify(dataset));
+            pie2.updateProp("data.content",pie2_dataset );
+        }
+    }
+
+    
+
+    jQuery.get('/getlist_report',function(data){
+            
+
+    var data_pieChart2=data;
+    //getlist_report
+
+        
+
+        option='All'
+
+        if(option==='All'){
+            for(i=0;i<data_pieChart2.length;i++){
+                if(pie2_reporttypes[data_pieChart2[i]["propertyid"]]===undefined)
+                    pie2_reporttypes[data_pieChart2[i]["propertyid"]]=0;
+
+                    pie2_reporttypes[data_pieChart2[i]["propertyid"]]=pie2_reporttypes[data_pieChart2[i]["propertyid"]]+data_pieChart2[i]["count"];
+            }
+        }
+
+       //jsObject = JSON.parse(reporttypes);
+
+       for (var prop in pie2_reporttypes) {
+        pie2_content_all.push(new data_obj("Propertyid:"+prop,pie2_reporttypes[prop]));
+        }
+        
+        //alert(JSON.stringify(pie2_content_all));
+
+        for(i=0;i<data_pieChart2.length;i++){
+            if(pie2_content[data_pieChart2[i]["type"]]===undefined)
+                pie2_content[data_pieChart2[i]["type"]]={};
+
+            if(pie2_content[data_pieChart2[i]["type"]][data_pieChart2[i]["propertyid"]]===undefined)
+                pie2_content[data_pieChart2[i]["type"]][data_pieChart2[i]["propertyid"]]=0;
+
+               pie2_content[data_pieChart2[i]["type"]][data_pieChart2[i]["propertyid"]]=pie2_content[data_pieChart2[i]["type"]][data_pieChart2[i]["propertyid"]]+data_pieChart2[i]["count"];
+        }
+
+        //alert(JSON.stringify(pie2_content));
+
+        doc=document.getElementById("type");
+        for(var prop in pie2_content){
+            option=document.createElement("OPTION");
+            textnode=document.createTextNode(prop);
+            option.appendChild(textnode);
+            doc.appendChild(option);
+        }
+        pie2= new d3pie("pieChart2", {
+            "header": {
+                "title": {
+                    "text": "Various Properties",
+                    "fontSize": 20,
+                    "font": "open sans"
+                },
+                "titleSubtitlePadding": 9
+            },
+            "footer": {
+                "color": "#999999",
+                "fontSize": 10,
+                "font": "open sans",
+                "location": "bottom-left"
+            },
+            "size": {
+                "canvasWidth": 300,
+                "canvasHeight": 350,
+                "pieOuterRadius": "70%"
+            },
+            "data": {
+                "sortOrder": "value-desc",
+                "content": pie2_content_all
+            },
+            "labels": {
+                "outer": {
+                    "format":"none",
+                    "pieDistance": 32
+                },
+                "inner": {
+                    "format":"label-value2",
+                    "hideWhenLessThanPercentage": 3
+                },
+                "mainLabel": {
+                    "fontSize": 11
+                },
+                "percentage": {
+                    "color": "#ffffff",
+                    "decimalPlaces": 0
+                },
+                "value": {
+                    "color": "#adadad",
+                    "fontSize": 11
+                },
+                "lines": {
+                    "enabled": true
+                },
+                "truncation": {
+                    "enabled": true
+                }
+            },
+            "effects": {
+                "pullOutSegmentOnClick": {
+                    "effect": "linear",
+                    "speed": 400,
+                    "size": 8
+                }
+            },
+            "misc": {
+                "gradient": {
+                    "enabled": true,
+                    "percentage": 100
+                }
+            }
+        });
+
+    });
+
+//*********************PIE based on status****************************//
+
+    var data_pieChart3;
+    var reportstatus={};
+    var pie3_content_all=[];
+    var pie3_content={};
+    var pie3_dataset=[];
+
+    var changepie3data=function(value){
+        if(value==="All"){
+            pie3_dataset=[];
+            // alert(JSON.stringify(content_all));
+            // for(var prop in content_all)
+            //  dataset.push(new data_obj(prop,content_all[prop]));
+            // alert(JSON.stringify(dataset));
+            pie3.updateProp("data.content",pie3_content_all );
+        }
+        else{
+            pie3_dataset=[];
+            //alert(JSON.stringify(dataset));
+            for(var prop in pie3_content[value])
+                pie3_dataset.push(new data_obj(prop,pie3_content[value][prop]));
+            //alert(JSON.stringify(dataset));
+            pie3.updateProp("data.content",pie3_dataset );
+        }
+    }
+
+    var pie3;
+    
+    jQuery.get('/getlist_status',function(data){
+
+        //var data_pieChart3=[{"status":"CLOSE","propertyid":0,"count":1},{"status":"IN PROGRESS","propertyid":0,"count":2},{"status":"OPEN","propertyid":0,"count":4},{"status":"Close","propertyid":1,"count":1},{"status":"In Progress","propertyid":1,"count":1},{"status":"Close","propertyid":3,"count":1},{"status":"dd","propertyid":3,"count":1}];
+        //getlist_status
+
+        var data_pieChart3=data;
+
+        // var data_obj=function(label,value){
+        //  this.label=label;
+        //  this.value=value;
+        // }
+
+       
+
+        option='All'
+
+        if(option==='All'){
+            for(i=0;i<data_pieChart3.length;i++){
+                if(reportstatus[data_pieChart3[i]["status"]]===undefined)
+                    reportstatus[data_pieChart3[i]["status"]]=0;
+
+                    reportstatus[data_pieChart3[i]["status"]]=reportstatus[data_pieChart3[i]["status"]]+data_pieChart3[i]["count"];
+            }
+        }
+
+       //jsObject = JSON.parse(reporttypes);
+
+       for (var prop in reportstatus) {
+        pie3_content_all.push(new data_obj(prop,reportstatus[prop]));
+        }
+        
+        //alert(JSON.stringify(pie3_content_all));
+
+        for(i=0;i<data_pieChart3.length;i++){
+            if(pie3_content[data_pieChart3[i]["propertyid"]]===undefined)
+                pie3_content[data_pieChart3[i]["propertyid"]]={};
+
+            if(pie3_content[data_pieChart3[i]["propertyid"]][data_pieChart3[i]["status"]]===undefined)
+                pie3_content[data_pieChart3[i]["propertyid"]][data_pieChart3[i]["status"]]=0;
+
+               pie3_content[data_pieChart3[i]["propertyid"]][data_pieChart3[i]["status"]]=pie3_content[data_pieChart3[i]["propertyid"]][data_pieChart3[i]["status"]]+data_pieChart3[i]["count"];
+        }
+
+        //alert(JSON.stringify(content));
+
+        doc=document.getElementById("status_propertyid");
+        for(var prop in pie3_content){
+            option=document.createElement("OPTION");
+            textnode=document.createTextNode(prop);
+            option.appendChild(textnode);
+            doc.appendChild(option);
+        }
+
+        pie3= new d3pie("pieChart3", {
+        "header": {
+            "title": {
+                "text": "Status of report",
+                "fontSize": 20,
+                "font": "open sans"
+            },
+            "titleSubtitlePadding": 9
+        },
+        "footer": {
+            "color": "#999999",
+            "fontSize": 10,
+            "font": "open sans",
+            "location": "bottom-left"
+        },
+        "size": {
+            "canvasWidth": 300,
+            "canvasHeight": 350,
+            "pieOuterRadius": "70%"
+        },
+        "data": {
+            "sortOrder": "value-desc",
+            "content": pie3_content_all
+        },
+        "labels": {
+            "outer": {
+                "format":"none",
+                "pieDistance": 32
+            },
+            "inner": {
+                "format":"label-value2",
+                "hideWhenLessThanPercentage": 3
+            },
+            "mainLabel": {
+                "fontSize": 11
+            },
+            "percentage": {
+                "color": "#ffffff",
+                "decimalPlaces": 0
+            },
+            "value": {
+                "color": "#adadad",
+                "fontSize": 11
+            },
+            "lines": {
+                "enabled": true
+            },
+            "truncation": {
+                "enabled": true
+            }
+        },
+        "effects": {
+            "pullOutSegmentOnClick": {
+                "effect": "linear",
+                "speed": 400,
+                "size": 8
+            }
+        },
+        "misc": {
+            "gradient": {
+                "enabled": true,
+                "percentage": 100
+            }
+        }
+    });
+
+});
+
+//**********************************Line chart for different days of the week***********************//
+
+    var datalist;
+    var datalistjson={};
+    var datacategories=[];
+    var j;
+    var newdate='';
+    var dataline=[];
+    jQuery.get('/getlist_date',function(data){
+        j=-1;
+        datalist=data;
+    
+    //var datalist=[{"propertyid":"1","date":"07-07-0011","count":2},{"propertyid":"2","date":"07-07-0011","count":2},{"propertyid":"1","date":"04-09-0012","count":1},{"propertyid":"1","date":"04-09-0012","count":1},{"propertyid":"2","date":"04-09-0012","count":2},{"propertyid":"1","date":"27-06-2015","count":1},{"propertyid":"2","date":"27-06-2015","count":3},{"propertyid":"1","date":"28-06-2015","count":2},{"propertyid":"1","date":"29-06-2015","count":1},{"propertyid":"2","date":"29-06-2015","count":3}];
+    //getlist2
+
+
+    
+    for(i=0;i<datalist.length;i++){
+        //alert(datalist[i]["date"]+" "+datalist[i]["count"]);
+        if(newdate.localeCompare(datalist[i]["date"])!==0)
+        {
+            newdate=datalist[i]["date"];
+            j++;
+            datacategories[j]=newdate;
+        }
+        // if(datalistjson[datalist[i]["date"]]===undefined)
+        //  datalistjson[datalist[i]["date"]]={};
+        // if(datalistjson[datalist[i]["date"]][datalist[i]["propertyid"]]===undefined)
+        //  datalistjson[datalist[i]["date"]][datalist[i]["propertyid"]]=datalist[i]["count"];
+
+        if(datalistjson[datalist[i]["propertyid"]]===undefined)
+            datalistjson[datalist[i]["propertyid"]]=[];
+        datalistjson[datalist[i]["propertyid"]][j]=datalist[i]["count"];
+        //datalistjson[datalist[i]["date"]]["x-axis"].push(datalist[i]["date"]);
+
+        // if(datalistjson[datalist[i]["propertyid"]]["y-axis"]===undefined)
+        //  datalistjson[datalist[i]["propertyid"]]["y-axis"]=[];
+        // datalistjson[datalist[i]["propertyid"]]["y-axis"].push(datalist[i]["count"]);
+
+
+    }
+
+    //alert(JSON.stringify(datalistjson));
+
+    
+    var  i=0;
+    for(var prop in datalistjson){
+        dataline[i]={};
+        dataline[i]["name"]="propertyid_"+prop;
+        dataline[i]["data"]=datalistjson[prop];
+        i++;
+    }
+
+    $('#linechart3').highcharts({
+        title: {
+            text: 'Report Trend',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Total number of Reports per month',
+            x: -20
+        },
+        xAxis: {
+            title:{
+                text: 'Days'
+            },
+            categories: datacategories
+        },
+        yAxis: {
+            title: {
+                text: 'Number of Reports'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' reports'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series:  JSON.parse(JSON.stringify(dataline))
+    });
+
+});
+
+    //alert(JSON.stringify(dataline));
+
+    
+
+
+
+//******************************line chart showing trending in reports******************************//
+
+
+
+//*****************************************************************************//
+
+
+
+//*******************************************************************************//
+
+    var datalistjson1={};
+    var datacategories1=[];
+    var j;
+    var newdate='';
+    var datalist1;
+    var dataline1=[];
+    jQuery.get('/getlist_day',function(data){
+        j=-1;
+    datalist1=data;
+    //getlist_day
+
+    
+    for(i=0;i<datalist1.length;i++){
+        //alert(datalist[i]["date"]+" "+datalist[i]["count"]);
+        if(newdate.localeCompare(datalist1[i]["day"])!==0)
+        {
+            newdate=datalist1[i]["day"];
+            j++;
+            //alert(j);
+            datacategories1[j]=newdate;
+        }
+        // if(datalistjson[datalist[i]["date"]]===undefined)
+        //  datalistjson[datalist[i]["date"]]={};
+        // if(datalistjson[datalist[i]["date"]][datalist[i]["propertyid"]]===undefined)
+        //  datalistjson[datalist[i]["date"]][datalist[i]["propertyid"]]=datalist[i]["count"];
+
+        if(datalistjson1[datalist1[i]["propertyid"]]===undefined)
+            datalistjson1[datalist1[i]["propertyid"]]=[];
+        datalistjson1[datalist1[i]["propertyid"]][j]=datalist1[i]["count"];
+        //datalistjson[datalist[i]["date"]]["x-axis"].push(datalist[i]["date"]);
+
+        // if(datalistjson[datalist[i]["propertyid"]]["y-axis"]===undefined)
+        //  datalistjson[datalist[i]["propertyid"]]["y-axis"]=[];
+        // datalistjson[datalist[i]["propertyid"]]["y-axis"].push(datalist[i]["count"]);
+
+
+    }
+
+    //alert(JSON.stringify(datalistjson1));
+
+    
+    var  i=0;
+    for(var prop in datalistjson1){
+        dataline1[i]={};
+        dataline1[i]["name"]="propertyid_"+prop;
+        dataline1[i]["data"]=datalistjson1[prop];
+        i++;
+    }
+
+    //alert(JSON.stringify(dataline1));
+
+    $('#linechart4').highcharts({
+        title: {
+            text: 'Report Trend',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Total number of Reports per day',
+            x: -20
+        },
+        xAxis: {
+            title:{
+                text: 'Days'
+            },
+            categories: datacategories1
+        },
+        yAxis: {
+            title: {
+                text: 'Number of Reports'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' reports'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series:  JSON.parse(JSON.stringify(dataline1))
+    });
+
+});
+
+
+
+//************************JQUERy for property select***************************//
+
+    $("#propertyid").change(function(){
+        //alert($(this).val());
+        changepiedata($(this).val());
+    });
+
+    $("#type").change(function(){
+        //alert($(this).val());
+        changepie2data($(this).val());
+    });
+
+    $("#status_propertyid").change(function(){
+        //alert($(this).val());
+        changepie3data($(this).val());
+    });
+
+    
+
+
+
+        </script>
+        <style>
+
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+
+        .grid path,
+        .grid line {
+          fill: none;
+          stroke: rgba(0, 0, 0, 0.25);
+          shape-rendering: crispEdges;
+        }
+
+        .x.axis path {
+          display: none;
+        }
+
+        .line {
+          fill: none;
+          stroke-width: 2.5px;
+        }
+        </style>
+    </body>
+
+</html>

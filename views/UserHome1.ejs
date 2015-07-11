@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+</html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){ 
+  $("#flip").click(function(){  
+    $("#panel").toggle();
+   });
+});
+
+</script>
+<style>
+
+#bar 
+{
+text-align : right;
+font-size: 125%;
+}
+
+#propertyTable
+{
+border: 1px solid black;
+float:center;
+height: 60px;
+width: 600px;
+margin-left: 25%;
+font-size: 100%;
+}
+
+h3
+{
+color:#00A11B;
+}
+img{
+float:right;
+width:100px;
+height:80px
+}
+
+#panel,#flip
+{
+font-size:20px;
+width:300px;
+padding:5px;
+text-align:center;
+background-color:#d3d3d3;
+clear:both;
+float:right;
+}
+
+#panel{
+border-collapse: collapse;
+length:1000px;
+display:none;
+padding:5px;
+}
+
+table{
+border-collapse: collapse;
+}
+</style>
+
+
+</head>
+
+<body>
+
+
+<h3 >Welcome</h3>
+<div id="bar" float="right">
+<a href="/EmployeeDetails">Employee Details</a> 
+</div>
+
+<table id="propertyTable" border="1"  >
+<tr><td>Property No</td>
+<td>Property Name</td>
+<td>Contact Name</td>
+<td>Contact Number</td>
+<td>Address</td>
+<td>Comments</td>
+<td>Update Date</td>
+<td>Property Details</td>
+<td>Guard Count</td>
+</tr>
+
+<%for(i in property)
+{
+%>
+<tr>
+<td><%=property[i].PROPERTY_NO%></td>
+<td><%=property[i].PROPERTY_NAME%></td>
+<td><%=property[i].CONTACT_NAME%></td>
+<td><%=property[i].CONTACT_NUMBER%></td>
+<td><%=property[i].ADDRESS%></td>
+<td><%=property[i].COMMENTS%></td>
+<td><%=property[i].UPDATE_DATE%></td>
+<td><%=property[i].PROPERTY_DETAILSCOL%>
+<td><%=property[i].GUARD_COUNT%>
+</td>
+</tr>
+<%}%>
+</table>
+<div id="flip">
+ <b>Add Property</b>
+</div>
+
+<div id="panel">
+<form method="post" action="/AddPropertyAmit">
+<table>
+    <tr><td><b>*Property Name</b></td><td><input type="text" id="propertyname" name="propertyname" required></td></tr>
+    <tr><td><b>*Contact Name</td><td><input type="text" id="contactname" name="contactname" required></td></tr>
+    <tr><td><b>*Contact Number</b></td><td><input type="text" id="contactno" name="contactno" required></td></tr>
+    <tr><td><b>*Address</b></td><td><input type="text" id="address" name="address" required></td></tr>
+     <tr><td><b>*Comments</b></td><td><input type="text" id="comments" name="comments" required></td></tr>
+     <tr><td><b>*Update Date</b></td><td><input type="text" id="updatedate" name="updatedate" required></td></tr>
+     <tr><td><b>*Property Details</b></td><td><input type="text" id="propertydetails" name="propertydetails" required></td></tr>
+     <tr><td><b>*Client Id</b></td><td><input type="text" id="clientid" name="clientid" required></td></tr>
+     <tr><td><b>*Guard Count</b></td><td><input type="text" id="guardcount" name="guardcount" required></td></tr> 
+    <tr><td></td><td><button id="b1" type="submit">Add Product</button></td></tr>    
+</table>
+</form>
+</div>
+</body>
+</html>

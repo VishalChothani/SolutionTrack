@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Guard List page</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <% include dashboard_header.ejs %>
+        <div id="page-wrapper" class="manual-height">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Guard List
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-user fa-fw"></i>List of Guards</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart">
+                                     <div class="row">
+                                        <div class="col-lg-4 col-lg-offset-4">
+                                            <input type="search" id="search" value="" class="form-control" placeholder="Search">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <% if(guard_list.length==0){ %>
+                                                <div class="col-lg-12 col-xs-12">
+                                                    <p class="margin-top-15"><label> No gaurds for this property </label></p>
+                                                </div>
+                                            <% }
+                                            else { %>
+                                            <table class="table" id="table">
+                                                <thead>
+                                                    <tr>                                                        
+                                                        <th>Officer Name</th>
+                                                        <th>Address</th>
+                                                        <th>SSN</th>
+                                                        <th>Phone Number</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%for(i in guard_list)
+                                                        {
+                                                        %>
+                                                            <tr>                                        
+                                                                <td><%=guard_list[i].NAME%></td>
+                                                                <td><%=guard_list[i].ADDRESS_1%></td>
+                                                                <td><%=guard_list[i].SSN%></td>
+                                                                <td><%=guard_list[i].PHONE_NUMBER%></td>        
+                                                            </tr>
+                                                        <%}%>                           
+                                                    </tbody>
+                                                    
+                                                </table>
+                                                <% } %>
+                                            </table>
+                                            <hr>
+                                        </div>
+                                    </div>         	
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/jquery.searchable-1.0.0.min.js"></script>    
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script>
+    
+        $(function () 
+        {
+            $( '#table' ).searchable({
+                striped: true,
+                oddRow: { 'background-color': '#f5f5f5' },
+                evenRow: { 'background-color': '#fff' },
+                searchType: 'fuzzy'
+            });
+        
+            $( '#searchable-container' ).searchable({
+                searchField: '#container-search',
+                selector: '.row',
+                childSelector: '.col-xs-4',
+                show: function( elem ) {
+                    elem.slideDown(100);
+                },
+                hide: function( elem ) {
+                    elem.slideUp( 100 );
+                }
+            })
+        });
+
+    </script>
+    </body>
+
+</html>

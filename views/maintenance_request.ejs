@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Maintenance Request page</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <% include dashboard_header.ejs %>
+
+        <div id="page-wrapper" class="manual-height">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Maintenance request
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bell fa-fw"></i>Maintenance Request Area</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart">
+                                     <form class="form-horizontal form_margin" role="form">
+                                   <div class="form-group">
+                                        <label class="col-md-2 control-label">Client Name</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control" type="text" >
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Phone Number</label>
+                                        <div class="col-md-8">
+                                          <input class="form-control" type="number" >
+                                        </div>
+                                    </div>
+              
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Email</label>
+                                        <div class="col-md-8">
+                                          <input class="form-control" type="email" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Property Name</label>
+                                        <div class="col-md-8">
+                                          <input class="form-control" type="text" value="">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Property Location</label>
+                                        <div class="col-md-8">
+                                          <input class="form-control" type="text" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Contract Number</label>
+                                        <div class="col-md-8">
+                                          <input class="form-control" type="text" value=" ">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Message</label>
+                                        <div class="col-md-8">
+                                          <input class="form-control" type="text" value=" ">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label"></label>
+                                        <div class="col-md-8">
+                                          <input type="button" class="btn btn-primary" value="Save Changes">
+                                          <span></span>
+                                          <input type="reset" class="btn btn-default" value="Cancel">
+                                        </div>
+                                    </div>
+                                </form>         	
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    </body>
+
+</html>

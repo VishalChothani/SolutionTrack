@@ -1,13 +1,246 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= searchResult %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <% for(i in searchResult)
-    { %>
-    	<span> <%= searchResult[i].question %>
-    <% } %>
-  </body>
-</html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="description" content="">
+			<meta name="author" content="">    
+
+			<title>Index</title>
+
+			<!-- Bootstrap core CSS -->
+			<link href="css/bootstrap.css" rel="stylesheet">
+
+			<!-- Custom styles for this template -->
+			<link href="css/style.css" rel="stylesheet">
+			<link href="css/font-awesome.min.css" rel="stylesheet">
+			<link href="js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+
+		</head>
+
+		<body data-spy="scroll" data-offset="0" data-target="#theMenu">
+			
+			<!-- Menu -->
+			<nav class="menu" id="theMenu">
+				<div class="menu-wrap">
+					<h1 class="logo"><a href="index.html#home">Smart Track</a></h1>
+					<i class="fa fa-times menu-close"></i>
+					<a href="#home" class="smoothScroll">Home</a>
+					<a href="#about" class="smoothScroll">About</a>
+					<a href="#features" class="smoothScroll">Features</a>
+					<a href="#services" class="smoothScroll">Services</a>
+					<a href="#contact" class="smoothScroll">Contact</a>
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-dribbble"></i></a>
+					<a href="#"><i class="fa fa-envelope"></i></a>
+				</div>
+				
+				<!-- Menu button -->
+				<div id="menuToggle"><i class="fa fa-bars"></i></div>
+			</nav>
+
+			<section id="home" name="home"></section>
+
+
+			<div id="headerwrap">
+				<div class="logo">
+					<span>Smart track </span>
+					<a href="/create_account" class="create_account">Create Account </a>
+					<a href="/login" class="login">Login</a>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<h1>SMART TRACK</h1>
+						</div>
+					</div> 	<!-- /row -->
+				</div>		<!--/container -->
+			</div>			<!--/headerwrap -->
+		
+			<section id="about" name="about"></section>
+
+			<div id="aboutwrap">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-2 name">													
+						</div>		<!--/col-lg-4-->
+						<div class="col-lg-8 name-desc">
+							<h2>Smart Track System</h2>
+							
+							
+							<div class="col-md-6">
+								<p>Smart Track System optimizes security coverage and manages officer presence in real-time, capturing all of the data generated from day to day security operations. Managers deploy their assets, assign routes and track performance while security officers in the field use Smart Track Mobile devices to perform scheduled and self-initiated routes, scan checkpoints, create high quality incident reports and receive dispatches. The intuitive nature of the Smart Track Mobile device, available for Apple iOS, Android and Windows Mobile, boosts overall security performance while reducing costs and training time.</p>
+							</div>
+							<div class="col-md-6">
+								<p>Any data produced is synchronized with Smart Track suite of product modules and made available to decision-makers in the form of managerial reports. This allows management to schedule employees, assign routes and track staff effectiveness through coverage reports. The user-friendly interface lets Managers and Supervisors create and edit master and daily rosters. Front line staff are able to input self-initiated activities, providing a summary of each guard's daily duty. </p>
+							</div>
+							
+						</div>		<!--/col-lg-8-->
+				
+					</div>			<!-- /row -->
+				</div>				<!-- /container -->
+			</div>					<!-- /aboutwrap -->
+		
+			<!-- ABOUT SEPARATOR -->
+			<div class="sep about" data-stellar-background-ratio="0.5"></div>
+			
+			<!-- features SECTION -->
+			<section id="features" name="features"></section>
+			<div id="featureswrap">
+				<div class="container">
+					<div class="row">
+						<h1>Features</h1>
+						<div class="panel-group" id="accordion">
+		        			<div class="panel panel-default">
+			            		<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+			                		<h4 class="panel-title">
+			                    		<a style="font-weight:bold;">1. Route Building</a>
+			                		</h4>
+			            		</div>
+			            		<div id="collapsexOne" class="panel-collapse collapse in">
+			                		<div class="panel-body">
+			                    		<p>In Smart Track, Guard Tour Patrols consist of a series of fixed or roaming checkpoints which officers must complete during their shift. Every route created can be easily activated, assigned or changed from the Route Library. For fixed routes, a pre-set order and schedule are required, ensuring that officers complete the route in a specific order and complete each checkpoint in a specific time frame.  Checkpoint order and route duration can be changed quickly and easily by resizing, dragging or dropping them on the intuitive scheduling feature.</p>
+			                		</div>
+			            		</div>
+			        		</div>
+
+			        		<div class="panel panel-default">
+			            		<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+			                		<h4 class="panel-title">
+			                    		<a style="font-weight:bold;">2. Checkpoints</a>
+			                		</h4>
+			            		</div>
+			            		<div id="collapseTwo" class="panel-collapse collapse">
+			                		<div class="panel-body">
+			                    		<p>Smart Track's Guard Tour Patrol System optimizes the use of checkpoints by giving customers the ability to program questions and prompts to each checkpoint. For example, when an officer scans a certain checkpoint, he may be asked to record a temperature, check a fire extinguisher or lock a door. Once his or her action has been recorded, only then is the checkpoint complete. This additional activity is designed to leverage officer presence as much as possible, in order to capture and create high quality security data and increase the effectiveness of every asset in the field.</p>
+			                		</div>
+			            		</div>
+			        		</div>
+
+			        		<div class="panel panel-default">
+			            		<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+			                		<h4 class="panel-title">
+			                    		<a style="font-weight:bold;">3. Visual Roster</a>
+			                		</h4>
+			            		</div>
+			            		<div id="collapseThree" class="panel-collapse collapse">
+			                		<div class="panel-body">
+			                    		<p>Visual Roster is comprehensive guard force management tool where managers and officers can easily define, modify, log, print and review shifts, tours, checkpoints, officer activities, incident reports and dispatches. Using Visual Roster's intuitive drag-and-drop functionality, Supervisors can easily manage the day-to-day activities of their guards, and quickly make changes in any aspect of a tour.</p>
+			                		</div>
+			            		</div>
+			        		</div>
+			        	</div>
+		    			
+					</div>		<!-- /row -->
+			
+					
+				</div>			<!--/container -->
+			</div>				<!--/featureswrap -->
+
+			<!-- features SEPARATOR -->
+			<div class="sep features" data-stellar-background-ratio="0.5"></div>
+					
+			<!-- SERVICE SECTION -->
+			<section id="services" name="services"></section>
+			<div id="servicewrap">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8-offset-2 centered">
+							<h1>OUR SERVICES</h1>					
+						</div><!-- /col-lg-8 -->
+					</div><! --/row -->
+					
+					<div class="row mt">
+						<div class="col-lg-6 service">
+							<i class="fa fa-mobile"></i><p style="font-size: 22px;">Smart Track Devices</p><br/>
+							<p>Smart Track's Guard Tour System leverages the latest smart phone technology, including</p>
+								<ul>
+									<li>Apple iPhone, iPod Touch & iPad</li>
+									<li>Android</li>							
+								</ul>
+								<p>
+								The Smart Track mobile application transforms these advanced devices by empowering security officers with Incident Reporting, Guard Tour, Security Dispatch and Post Orders modules. Officers can quickly snap photos from an incident scene, and upload an unlimited number directly to an incident report. Or, to fill a narrative section of a report, an officer can utilize the voice-to-text feature, which ensures the officer spends time providing security, rather than manually filing reports.</p>
+						</div>
+										
+						<div class="col-lg-6 service">
+							<i class="fa fa-book"></i><p style="font-size: 22px;">Coverage Maps & Reports</p>
+							<p>Smart Track can map your facility and overlay checkpoints, officer routes and incident reports to quickly identify gaps in coverage. This feature allows managers or supervisors to easily adjust their deployment to match the current risk or threat. By analyzing and comparing incident and activity data with existing patrol routes and coverage, supervisors can create regular or ad hoc reports that assist in summarizing the effectiveness of current coverage and identify lapses or areas for improvement.</p>
+						</div>
+					</div>		<!--/row -->
+					<div class="row mt">
+						<div class="col-lg-6 service">
+							<i class="fa fa-book"></i><p style="font-size: 22px;">Analysis & Reporting</p>
+							<p>Like the entire Smart Track suite of software, the Guard Tour system captures and creates high quality security data that can be analyzed to extract business intelligence and inform better countermeasures. There are a variety of analysis tools built into the security guard software, plus data from Guard Tour can contribute to any number of reports created in the Security Analytics component of the greater Smart Track suite.
+								<ul>
+									<li>Checkpoint completions/percentages</li>
+									<li>Guard tour duration</li>
+									<li>Missed/skipped checkpoints</li>
+									<li>Checkpoint status</li>
+								</ul>
+							</p>
+						</div>
+					</div>		<!--/row -->
+					
+				</div>			<!--/container -->
+			</div>				<!--/servicewrap -->
+		
+		
+		
+		
+			<!-- CONTACT SEPARATOR -->
+			<div class="sep contact" data-stellar-background-ratio="0.5"></div>
+			
+			<section id="contact" name="contact"></section>
+			<div id="contactwrap">
+				<div class="container">
+					<div class="row">
+						<h1>Contact Us</h1>
+						
+						<div class="col-lg-12">
+							<form role="form">
+							  <div class="form-group">
+							    <label for="InputName1">Your Name</label>
+							    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+							    <label for="InputEmail1">Email address</label>
+							    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+							    <label for="InputText1">Message</label>
+							    <textarea class="form-control" rows="3"></textarea>
+							  </div>
+							  <button type="submit" class="btn btn-default">Submit</button>
+							</form>
+						</div>
+					
+					</div>		<!--/row -->
+				</div>			<!-- /container -->
+			</div>
+		
+	    <!-- Bootstrap core JavaScript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/classie.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	    <script src="js/smoothscroll.js"></script>
+		<script src="js/jquery.stellar.min.js"></script>
+		<script src="js/fancybox/jquery.fancybox.js"></script>    
+		<script src="js/main.js"></script>
+			<script>
+			$(function(){
+				$.stellar({
+					horizontalScrolling: false,
+					verticalOffset: 40
+				});
+			});
+			</script>
+			
+			<script type="text/javascript">
+	      $(function() {
+	        //    fancybox
+	          jQuery(".fancybox").fancybox();
+	      });
+		   </script>
+
+	  	</body>
+	</html>

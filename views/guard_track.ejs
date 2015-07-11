@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Guard Track page</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <% include dashboard_header.ejs %>
+        <div id="page-wrapper" class="manual-height">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Guard Track
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-male fa-fw"></i>Guard Area</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart"> 
+                                <div style="text-align:right;margin-right:100px;">
+                                    <select id="guardlist">
+                                        <option value='1'>Sambu</option>
+                                        <option value='2'>Vishal</option>
+                                        <option value='3'>Amit</option>
+                                        <option value='4'>Harleen</option>
+                                    </select>
+                                </div>                                    
+									<div id="googleMap" style="height:500px;"></div>
+								  <div id="div1"></div>         	
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>    
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script>
+        var slnumber=0;
+        var flightPlanCoordinates=[];
+        var flightPath;
+        var mapProp=null;
+        var map=null;
+        var myVar;
+        var marker;
+
+        function initialize() {
+        }
+
+        function drawMap(userid){
+            marker.setMap(map);
+
+            flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
+  
+            var first=true;
+            ajaxcall(slnumber,userid,first);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+
+        function ajaxcall(slnumber,userid,first){  
+            jQuery.get( "http://localhost:4000/ajaxsample",{ number: slnumber, Userid: userid }, 
+                function( data,status ) { 
+     // document.getElementById("div1").innerHTML=JSON.stringify(data);
+        // response contains site information
+       // ajaxfunction();
+
+       //alert(typeof(data));
+
+    nousercode:{
+
+       if(data == undefined || data == null || typeof(data) == 'undefined' || data == ''){
+          //alert("breaking");
+          break nousercode;
+       }
+       
+       if(data.length>1){
+        //alert(data[0].update_time);
+        slnumber=data[data.length-1].slno;
+        //alert(slnumber);
+        for(i=0;i<data.length;i++){
+          // var newdiv=document.createElement('div');
+          // newdiv.innerHTML=JSON.stringify(data[i]);
+          // var ni = document.getElementById('div1');
+          // ni.appendChild(newdiv); 
+           var newlatlng= new google.maps.LatLng(data[i].lattitude,data[i].longitude);
+           flightPlanCoordinates.push(newlatlng);
+  
+          flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+  
+        //document.getElementById("div1").innerHTML=JSON.stringify(flightPlanCoordinates);
+        
+        flightPath.setMap(map); 
+
+        }
+        marker.setPosition(new google.maps.LatLng(data[data.length-1].lattitude, data[data.length-1].longitude));
+        
+      }
+      else{
+        // alert(Object(data[data.length-1].slno));
+        slnumber = data[data.length-1].slno;
+        
+        //alert(slnumber);
+        //document.getElementById("div1").innerHTML=JSON.stringify(data);
+        var newlatlng= new google.maps.LatLng(data[0].lattitude,data[0].longitude);
+           flightPlanCoordinates.push(newlatlng);
+        
+          //alert(flightPlanCoordinates);
+          //alert(typeof(marker));
+          //alert(typeof(map));
+        
+        flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+  
+        //document.getElementById("div1").innerHTML=JSON.stringify(flightPlanCoordinates);
+        
+        flightPath.setMap(map); 
+
+        marker.setPosition(new google.maps.LatLng(data[data.length-1].lattitude, data[data.length-1].longitude));
+       // callback(slnumber);
+      //ajaxcall(slnumber);
+
+      } 
+        //alert(data[data.length-1].slno);
+      // ajaxcall(data[data.length-1].slno);
+  }
+      clearInterval(myVar);
+      myVar=setInterval(ajaxcall,3000,slnumber,userid,true);
+
+    });
+}
+
+
+mapProp = {
+    center:new google.maps.LatLng(37.335564, -121.881280),
+    zoom:15,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+  map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+  
+
+  flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+
+marker = new google.maps.Marker({
+    map:map,
+    animation: google.maps.Animation.DROP,
+   // position: new google.maps.LatLng(37.335564, -121.881280),
+    title: 'Name: Sambu Userid: 1'
+  });
+
+
+  $("#guardlist").change(function(){
+    var str = "";
+    $( "select option:selected" ).each(function() {
+      clearInterval(myVar);
+     // alert("chagning");
+      marker.setPosition(null);
+      flightPlanCoordinates=[];
+      flightPath.setMap(null);
+      drawMap($(this).val());
+    });
+    //$( "div" ).text( str );
+}).change();
+</script>
+    
+    
+</body>
+
+</html>
